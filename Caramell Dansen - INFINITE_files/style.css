@@ -1,0 +1,10 @@
+/********* HEYYYYYYYYYYYYYY ***********/
+body {overflow:hidden;padding:0;margin:0;}
+#background {background:url(img/Caramelldansen__Luke_and_Asch_by_darkangel6.gif); background-repeat:repeat ;width:100%; height:1000px; display:block; float:left; }
+#footer {position: fixed;left: 0px;bottom: 0px;padding: 5px;width: 100%;text-align: center;background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.5);height:25px}
+#footer a {color: #ffffff; }
+#footer-right {width: 575px;float: right;}
+#footer-right form,#twitter {float: right;margin: 3px 10px 0;}
+#footer-right form {float: right;padding: 0;margin: 0px 15px 0 10px;line-height: 12px;}
+.fb-like {margin-left: 280px;}
+#helptext { color:#ffffff;position:absolute; right:320px; top:6px}
