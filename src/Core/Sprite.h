@@ -41,13 +41,15 @@ public:
 
 	// Getters
 	bool IsVisible()			{ return isVisible; }
-	D3DXVECTOR2 GetPosition()	{ return D3DXVECTOR2(dstRect->left, dstRect->top); }
+	D3DXVECTOR3 GetPosition()	{ return D3DXVECTOR3(dstRect->left, dstRect->top, 0.f); }
 	D3DXVECTOR2 GetSize()		{ return D3DXVECTOR2(dstRect->right, dstRect->bottom); }
 
 protected:
 	Sprite();
 	void ApplyTexture(const ID3DXSprite* const spriteBatch);
 	void ApplyAlpha();
+
+	Texture::ID textureID;
 
 	RECT* texture;
 	RECT* dstRect;

@@ -69,7 +69,7 @@ public:
 //	void AddComponent(Component* comp);
 
 	
-
+	ID3DXSprite* GetSpriteBatch(){ return spriteBatch; }
 	//Audio*								GetAudio()		 { return audio;	}
 	//Input*								GetInput()		 { return input;	}
 	//Timer*								GetTimer()		 { return timer;	}

@@ -12,6 +12,7 @@ Sprite::Sprite()
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
+	, textureID()
 	//, flipType (SDL_FLIP_NONE)
 {
 
@@ -43,6 +44,7 @@ Sprite::Sprite(Texture::ID id)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
+	, textureID(id)
 	//, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new RECT();
@@ -75,6 +77,7 @@ Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
+	, textureID(id)
 	//, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new RECT();
@@ -116,7 +119,7 @@ void Sprite::Draw()
 	if (isVisible)
 	{
 		ApplyAlpha();
-		//ApplyTexture(gEngine->GetSpriteBatch());
+		ApplyTexture(gEngine->GetSpriteBatch());
 	}
 }
 
@@ -127,7 +130,22 @@ void Sprite::ApplyAlpha()
 
 void Sprite::ApplyTexture(const ID3DXSprite* const renderer)
 {
-	//SDL_RenderCopyEx(renderer, texture, srcRect, dstRect, angle, NULL, flipType);
+	D3DXMATRIX S;
+	D3DXVECTOR3 center(0.f, 0.f, 0.f);
+
+	D3DXMatrixScaling(&S, 1.f, -1.f, 1.f);
+	
+
+	HR(gEngine->GetSpriteBatch()->Begin(
+		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
+	
+	HR(gEngine->GetSpriteBatch()->SetTransform(&S));
+	HR(gEngine->GetSpriteBatch()->Draw(gEngine->GetTextures()->Get(textureID),
+		0, &center, &GetPosition(), 
+		D3DCOLOR_XRGB(255, 255, 255)));
+	HR(gEngine->GetSpriteBatch()->Flush());
+	
+	HR(gEngine->GetSpriteBatch()->End());
 }
 
 
