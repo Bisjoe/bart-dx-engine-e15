@@ -2,29 +2,22 @@
 
 #include "Common.h"
 #include "Component.h"
-
-// Shortcuts
-// Engine access
-#define cEngine Engine::GetInstance()
-
-/*
-// delta time
-#define DTime cEngine->GetTimer()->GetDeltaTime()
+//#include "DirectInput.h"
+//#include "GameTimer.h"
 
 // Resources
-#define Textures cEngine->GetTextures()
-#define Fonts cEngine->GetFonts()
-#define Sounds cEngine->GetSounds()
-#define Musics cEngine->GetMusics()
+#define Textures gEngine->GetTextures()
+//#define Fonts cEngine->GetFonts()
+//#define Sounds cEngine->GetSounds()
+//#define Musics cEngine->GetMusics()
 
 // Audio
-#define AudioSys cEngine->GetAudio()
+//#define AudioSys cEngine->GetAudio()
 
 // Inputs
-#define ThisKeyPressed cEngine->GetInput()->IsKeyPressed
-#define ThisKeyHeld cEngine->GetInput()->IsKeyHeld
-#define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
-*/
+//#define ThisKeyPressed gDInput->IsKeyPressed
+//#define ThisKeyHeld cEngine->GetInput()->IsKeyHeld
+//#define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
 
 class Engine: App
 {
@@ -57,7 +50,7 @@ public:
 //		-------------------------
 //		@comp Component to move
 //	**/
-//	void MoveBack(Component* comp);
+//	void MoveBack(Component* comp);-
 //
 //
 //	/**
@@ -82,7 +75,7 @@ public:
 	//Timer*								GetTimer()		 { return timer;	}
 	//SDL_Renderer*						GetRenderer()	 { return renderer; }
 	//SDL_Window*							GetWindow()		 { return window;	}
-	//ResourceHolder<SDL_Texture, int>*	GetTextures()	 { return textures; }
+	ResourceHolder<IDirect3DTexture9, int>*	GetTextures()	 { return textures; }
 	//ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts;	}
 	//ResourceHolder<Mix_Music, int>*		GetMusics()		 { return musics;	}
 	//ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds;	}
@@ -100,7 +93,7 @@ private:
 	//Timer*								timer;
 	//SDL_Renderer*						renderer;
 	//SDL_Window*							window;
-	//ResourceHolder<SDL_Texture, int>*	textures;
+	ResourceHolder<IDirect3DTexture9, int>*	textures;
 	//ResourceHolder<TTF_Font, int>*		fonts;
 	//ResourceHolder<Mix_Music, int>*		musics;
 	//ResourceHolder<Mix_Chunk, int>*		sounds;

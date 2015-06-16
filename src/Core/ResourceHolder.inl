@@ -1,40 +1,22 @@
-//#include "SDL.h"
-//#include "ResourceHolder.h"
-//
-//template <typename Resource, typename Identifier>
-//ResourceHolder<Resource, Identifier>::ResourceHolder()
-//{
-//
-//}
-//
-//template <typename Resource, typename Identifier>
-//void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std::string& filename)
-//{
-//	SDL_Surface* surface;
-//	SDL_Texture* texture;
-//	surface = IMG_Load(filename.c_str());
-//	//If the surface couldn't be loaded
-//	if (!surface)
-//	{
-//		printf("Image could not be loaded, ERROR: %s\n", IMG_GetError());
-//	}
-//	else
-//	{
-//		texture = SDL_CreateTextureFromSurface(Engine::GetInstance()->GetRenderer(), surface);
-//		SDL_FreeSurface(surface);
-//		//If the texture couldn't be created from the surface
-//		if (!texture)
-//		{
-//			printf("Failed to create texture, ERROR: %s\n", IMG_GetError());
-//		}
-//		else
-//		{
-//			InsertResource(id, std::move(texture));
-//		}
-//	}
-//}
-//
-//
+#include "Utils.h"
+#include "ResourceHolder.h"
+
+template <typename Resource, typename Identifier>
+ResourceHolder<Resource, Identifier>::ResourceHolder()
+{
+
+}
+
+template <typename Resource, typename Identifier>
+void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std::string& filename)
+{
+	IDirect3DTexture9* texture;
+	HR(D3DXCreateTextureFromFile(gD3DDevice, filename.c_str(), &texture));
+
+	InsertResource(id, std::move(texture));
+}
+
+
 //template <typename Resource, typename Identifier>
 //void ResourceHolder<Resource, Identifier>::LoadSound(Identifier id, const std::string& filename)
 //{
@@ -83,25 +65,25 @@
 //		InsertResource(id, std::move(font));
 //	}
 //}
-//
-//template <typename Resource, typename Identifier>
-//Resource* ResourceHolder<Resource, Identifier>::Get(Identifier id) const
-//{
-//	//Tries to retrieve the resource corresponding to the specified ID
-//	auto found = mResources.find(id);
-//	if (found != mResources.end())
-//	{
-//		return found->second; 
-//	}
-//	else
-//	{
-//		return NULL;
-//	}
-//}
-//
-//template <typename Resource, typename Identifier>
-//void ResourceHolder<Resource, Identifier>::InsertResource(Identifier id, Resource* resource)
-//{
-//	auto inserted = mResources.insert(std::make_pair(id, std::move(resource)));
-//	assert(inserted.second);
-//}
+
+template <typename Resource, typename Identifier>
+Resource* ResourceHolder<Resource, Identifier>::Get(Identifier id) const
+{
+	//Tries to retrieve the resource corresponding to the specified ID
+	auto found = mResources.find(id);
+	if (found != mResources.end())
+	{
+		return found->second; 
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+template <typename Resource, typename Identifier>
+void ResourceHolder<Resource, Identifier>::InsertResource(Identifier id, Resource* resource)
+{
+	auto inserted = mResources.insert(std::make_pair(id, std::move(resource)));
+	assert(inserted.second);
+}

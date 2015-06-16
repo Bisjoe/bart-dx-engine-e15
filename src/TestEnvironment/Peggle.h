@@ -1,5 +1,8 @@
 #pragma once
+
+#include "Engine.h"
 #include "Component.h"
+
 class Peggle :
 	public Component
 {

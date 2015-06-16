@@ -12,20 +12,20 @@ Sprite::Sprite()
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, flipType (SDL_FLIP_NONE)
+	//, flipType (SDL_FLIP_NONE)
 {
 
-	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
-	srcRect->h = 0;
-	srcRect->w = 0;
+	srcRect = new RECT();
+	srcRect->left = 0;
+	srcRect->top = 0;
+	srcRect->bottom = 0;
+	srcRect->right = 0;
 
-	dstRect = new SDL_Rect();
-	dstRect->x = 0;
-	dstRect->y = 0;
-	dstRect->h = 0;
-	dstRect->w = 0;
+	dstRect = new RECT();
+	dstRect->left = 0;
+	dstRect->top = 0;
+	dstRect->bottom = 0;
+	dstRect->right = 0;
 }
 
 ////////////////////////////////
@@ -36,24 +36,26 @@ Sprite::Sprite()
 //@id - This is your "Sprite sheet" ID.
 ////////////////////////////////
 Sprite::Sprite(Texture::ID id)
-	: texture(Textures->Get(id))
-	, isVisible(true)
+	: 
+	//texture(Textures->Get(id)),
+	isVisible(true)
 	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, flipType(SDL_FLIP_NONE)
+	//, flipType(SDL_FLIP_NONE)
 {
-	srcRect = new SDL_Rect();
-	srcRect->x = 0;
-	srcRect->y = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
+	srcRect = new RECT();
+	srcRect->left = 0;
+	srcRect->top = 0;
 
+	//D3DXCreateTextureFromFileEx();
+	
+	//SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
 
-	dstRect = new SDL_Rect();
-	dstRect->x = 0;
-	dstRect->y = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	dstRect = new RECT();
+	dstRect->left = srcRect->left;
+	dstRect->top = srcRect->top;
 }
 
 /////////////////////////////////////////////////////
@@ -65,31 +67,33 @@ Sprite::Sprite(Texture::ID id)
 //@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
 //@srcSize - The Sprite's width/height
 ////////////////////////////////////////////////////////////////////
-Sprite::Sprite(Texture::ID id, const point<int> srcPos, const point<int> srcSize)
-	: texture(Engine::GetInstance()->GetTextures()->Get(id))
-	, isVisible(true)
+Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
+	: 
+	//texture(Engine::GetInstance()->GetTextures()->Get(id)), 
+	isVisible(true)
 	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, flipType(SDL_FLIP_NONE)
+	//, flipType(SDL_FLIP_NONE)
 {
-	srcRect = new SDL_Rect();
-	srcRect->x = srcPos.x;
-	srcRect->y = srcPos.y;
-	srcRect->w = srcSize.x;
-	srcRect->h = srcSize.y;
+	srcRect = new RECT();
+	srcRect->left = srcPos->x;
+	srcRect->top = srcPos->y;
+	srcRect->right = srcSize->x;
+	srcRect->bottom = srcSize->y;
 
-	dstRect = new SDL_Rect();
-	dstRect->x = 0;
-	dstRect->y = 0;
-	dstRect->w = srcSize.x;
-	dstRect->h = srcSize.y;
+	dstRect = new RECT();
+	dstRect->left = 0;
+	dstRect->top = 0;
+	dstRect->right = srcSize->x;
+	dstRect->bottom = srcSize->y;
 }
 
 Sprite::~Sprite()
 {
-
+	delete srcRect;
+	delete dstRect;
 }
 
 void Sprite::Start()
@@ -112,7 +116,7 @@ void Sprite::Draw()
 	if (isVisible)
 	{
 		ApplyAlpha();
-		ApplyTexture(Engine::GetInstance()->GetRenderer());
+		//ApplyTexture(gEngine->GetSpriteBatch());
 	}
 }
 
@@ -121,9 +125,9 @@ void Sprite::ApplyAlpha()
 	//SDL_SetTextureAlphaMod(texture, alpha);
 }
 
-void Sprite::ApplyTexture(SDL_Renderer* renderer)
+void Sprite::ApplyTexture(const ID3DXSprite* const renderer)
 {
-	SDL_RenderCopyEx(renderer, texture, srcRect, dstRect, angle, NULL, flipType);
+	//SDL_RenderCopyEx(renderer, texture, srcRect, dstRect, angle, NULL, flipType);
 }
 
 
@@ -136,9 +140,9 @@ void Sprite::ApplyTexture(SDL_Renderer* renderer)
 ////////////////////////////////////////////////////////////////////
 void Sprite::Scale(float k)
 {
-	SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
-	dstRect->w = (int)(srcRect->w*k);
-	dstRect->h = (int)(srcRect->h*k);
+	//SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
+	//dstRect->right = (int)(srcRect->right*k);
+	//dstRect->bottom = (int)(srcRect->bottom*k);
 	scaling = k;
 }
 
@@ -152,8 +156,8 @@ void Sprite::Scale(float k)
 ////////////////////////////////////////////////////////
 void Sprite::ResizeTo(int w, int h)
 {
-	dstRect->w = w;
-	dstRect->h = h;
+	dstRect->right = w;
+	dstRect->bottom = h;
 }
 
 ///////////////////
@@ -161,7 +165,7 @@ void Sprite::ResizeTo(int w, int h)
 ///////////////////
 void Sprite::Flip(unsigned int flip)
 {
-	this->flipType = (SDL_RendererFlip)flip;
+	//this->flipType = (SDL_RendererFlip)flip;
 }
 
 ///////////////////
