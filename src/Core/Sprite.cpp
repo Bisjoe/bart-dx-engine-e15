@@ -12,7 +12,6 @@ Sprite::Sprite()
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, textureID()
 	//, flipType (SDL_FLIP_NONE)
 {
 
@@ -37,14 +36,12 @@ Sprite::Sprite()
 //@id - This is your "Sprite sheet" ID.
 ////////////////////////////////
 Sprite::Sprite(Texture::ID id)
-	: 
-	//texture(Textures->Get(id)),
-	isVisible(true)
+	: texture(Textures->Get(id))
+	, isVisible(true)
 	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, textureID(id)
 	//, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new RECT();
@@ -70,14 +67,12 @@ Sprite::Sprite(Texture::ID id)
 //@srcSize - The Sprite's width/height
 ////////////////////////////////////////////////////////////////////
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
-	: 
-	//texture(Engine::GetInstance()->GetTextures()->Get(id)), 
-	isVisible(true)
+	: texture(Textures->Get(id))
+	, isVisible(true)
 	, alpha(255)
 	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
-	, textureID(id)
 	//, flipType(SDL_FLIP_NONE)
 {
 	srcRect = new RECT();
@@ -139,7 +134,7 @@ void Sprite::ApplyTexture(const ID3DXSprite* const renderer)
 		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	
 	HR(gEngine->GetSpriteBatch()->SetTransform(&S));
-	HR(gEngine->GetSpriteBatch()->Draw(gEngine->GetTextures()->Get(textureID),
+	HR(gEngine->GetSpriteBatch()->Draw(texture,
 		0, &center, &GetPosition(), 
 		D3DCOLOR_XRGB(255, 255, 255)));
 	HR(gEngine->GetSpriteBatch()->Flush());
