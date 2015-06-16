@@ -148,6 +148,28 @@ void Engine::Draw()
 	//SDL_RenderClear(renderer);
 }
 
+void Engine::OnResetDevice()
+{
+	spriteBatch->OnResetDevice();
+
+	auto iter = Component::components.begin();
+	for (; iter != Component::components.end(); iter++)
+	{
+		(*iter)->OnResetDevice();
+	}
+}
+
+void Engine::OnLostDevice()
+{
+	spriteBatch->OnLostDevice();
+
+	auto iter = Component::components.begin();
+	for (; iter != Component::components.end(); iter++)
+	{
+		(*iter)->OnLostDevice();
+	}
+}
+
 
 int Engine::Run()
 {

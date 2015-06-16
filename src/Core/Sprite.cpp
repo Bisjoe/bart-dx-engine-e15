@@ -135,7 +135,6 @@ void Sprite::ApplyTexture(const ID3DXSprite* const renderer)
 
 	D3DXMatrixScaling(&S, 1.f, -1.f, 1.f);
 	
-
 	HR(gEngine->GetSpriteBatch()->Begin(
 		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	

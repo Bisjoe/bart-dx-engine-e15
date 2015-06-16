@@ -22,6 +22,7 @@ public:
 	virtual void Start();
 	virtual void Update();
 	virtual void Stop();
+
 	void Draw();
 	void Kill() { delete this; }
 

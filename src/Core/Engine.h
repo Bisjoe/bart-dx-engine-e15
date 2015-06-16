@@ -81,6 +81,8 @@ public:
 	//ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds;	}
 
 private:
+	void OnResetDevice();
+	void OnLostDevice();
 	void Start();
 	void Update();
 	void Draw();

@@ -15,6 +15,8 @@ public:
 	virtual void Draw()	 {} //= 0;
 	virtual void Stop()  {} //= 0;
 	virtual void Kill()  {} //= 0;
+	virtual void OnResetDevice() {}
+	virtual void OnLostDevice()  {}
 
 	virtual void SetActive(bool toggle) { isActive = toggle; };
 
