@@ -49,9 +49,7 @@ protected:
 	void ApplyTexture(const ID3DXSprite* const spriteBatch);
 	void ApplyAlpha();
 
-	Texture::ID textureID;
-
-	RECT* texture;
+	IDirect3DTexture9* texture;
 	RECT* dstRect;
 	RECT* srcRect;
 	//SDL_RendererFlip flipType;
