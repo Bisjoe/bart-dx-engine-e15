@@ -83,7 +83,6 @@ Resource* ResourceHolder<Resource, Identifier>::Get(Identifier id) const
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::InsertResource(Identifier id, Resource* resource)
 {
-	mResources[id] = resource;
-	//auto inserted = mResources.insert(std::make_pair(id, std::move(resource)));
-	//assert(inserted.second);
+	auto inserted = mResources.insert(std::make_pair(id, std::move(resource)));
+	assert(inserted.second);
 }
