@@ -4,14 +4,11 @@
 template <typename Resource, typename Identifier>
 ResourceHolder<Resource, Identifier>::ResourceHolder()
 {
-	mResources = std::map<Identifier, Resource*>();
 }
 
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std::string& filename)
 {
-	mResources = std::map<Identifier, Resource*>();
-
 	IDirect3DTexture9* texture;
 	HR(D3DXCreateTextureFromFile(gD3DDevice, filename.c_str(), &texture));
 

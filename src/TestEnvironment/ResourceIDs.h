@@ -6,7 +6,8 @@ namespace Texture
 {
 	enum ID
 	{
-		ELEPHANT_DE_MER
+		ELEPHANT_DE_MER,
+		POW_POW_POW
 	};
 }
 

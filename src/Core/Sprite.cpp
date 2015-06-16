@@ -123,23 +123,21 @@ void Sprite::ApplyAlpha()
 	//SDL_SetTextureAlphaMod(texture, alpha);
 }
 
-void Sprite::ApplyTexture(const ID3DXSprite* const renderer)
+void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
 	D3DXMATRIX S;
 	D3DXVECTOR3 center(0.f, 0.f, 0.f);
 
 	D3DXMatrixScaling(&S, 1.f, -1.f, 1.f);
 	
-	HR(gEngine->GetSpriteBatch()->Begin(
+	HR(renderer->Begin(
 		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	
-	HR(gEngine->GetSpriteBatch()->SetTransform(&S));
-	HR(gEngine->GetSpriteBatch()->Draw(texture,
-		0, &center, &GetPosition(), 
-		D3DCOLOR_XRGB(255, 255, 255)));
-	HR(gEngine->GetSpriteBatch()->Flush());
+	HR(renderer->SetTransform(&S));
+	HR(renderer->Draw(texture, 0, &center, &GetPosition(), D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Flush());
 	
-	HR(gEngine->GetSpriteBatch()->End());
+	HR(renderer->End());
 }
 
 

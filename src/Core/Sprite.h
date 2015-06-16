@@ -47,7 +47,7 @@ public:
 
 protected:
 	Sprite();
-	void ApplyTexture(const ID3DXSprite* const spriteBatch);
+	void ApplyTexture(ID3DXSprite* const spriteBatch);
 	void ApplyAlpha();
 
 	IDirect3DTexture9* texture;
