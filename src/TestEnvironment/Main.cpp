@@ -10,6 +10,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
 	Engine* engine = new Engine(hInstance, "SpriteApp");
 	gEngine = engine;
 
+	engine->Init();
+
 	Peggle* game = new Peggle();
 
 	int assert = gEngine->Run();

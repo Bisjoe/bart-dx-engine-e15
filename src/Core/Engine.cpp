@@ -56,43 +56,23 @@ void Engine::Init()
 	Init(DEFAULT_WIN_W, DEFAULT_WIN_H, &res);
 }
 
-void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution) {
+void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution) 
+{
+	D3DXCreateSprite(gD3DDevice, &spriteBatch);
 
-	//if (TTF_Init() == -1)
+	//audio = new Audio();
+	//input = new Input();
+	//timer = new Timer();
+
+	textures = new ResourceHolder<IDirect3DTexture9, int>();
+	//fonts = new ResourceHolder<TTF_Font, int>();
+	//musics = new ResourceHolder<Mix_Music, int>();
+	//sounds = new ResourceHolder<Mix_Chunk, int>();
+
+	//if (NativeResolution.x != 0 && NativeResolution.y != 0)
 	//{
-	//	printf("SDL TTF could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
-	//}
-	//if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	//{
-	//	printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	//}
-	//else
-	//{
-	//	// Créer la fenetre
-	//	window = SDL_CreateWindow(
-	//		DEFAULT_WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-	//		screenWidth, screenHeight, SDL_WINDOW_SHOWN);
-	//
-	//	if (window == nullptr)
-	//	{
-	//		printf(" Window could not be created! SDL_Error: %s\n", SDL_GetError());
-	//	}
-	//	else
-	//	{
-	//		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	//		audio = new Audio();
-	//		input = new Input();
-	//		timer = new Timer();
-	//		textures = new ResourceHolder<SDL_Texture, int>();
-	//		fonts = new ResourceHolder<TTF_Font, int>();
-	//		musics = new ResourceHolder<Mix_Music, int>();
-	//		sounds = new ResourceHolder<Mix_Chunk, int>();
-	//		if (NativeResolution.x != 0 && NativeResolution.y != 0)
-	//		{
-	//			this->scaling.x = (screenWidth / NativeResolution.x);
-	//			this->scaling.y = (screenHeight / NativeResolution.y);
-	//		}
-	//	}
+	//	this->scaling.x = (screenWidth / NativeResolution.x);
+	//	this->scaling.y = (screenHeight / NativeResolution.y);
 	//}
 }
 

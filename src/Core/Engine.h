@@ -91,7 +91,7 @@ private:
 	//Audio*								audio;
 	//Input*								input;
 	//Timer*								timer;
-	//SDL_Renderer*						renderer;
+	ID3DXSprite* spriteBatch;
 	//SDL_Window*							window;
 	ResourceHolder<IDirect3DTexture9, int>*	textures;
 	//ResourceHolder<TTF_Font, int>*		fonts;
