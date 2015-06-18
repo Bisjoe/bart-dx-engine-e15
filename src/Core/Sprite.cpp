@@ -122,14 +122,19 @@ void Sprite::ApplyAlpha()
 void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
 	D3DXMATRIX S;
-	D3DXVECTOR3 center(0.f, 0.f, 0.f);
+	D3DXMATRIX R;
+	D3DXMATRIX T;
+	D3DXVECTOR3 center(texInfos->infos.Width/2, texInfos->infos.Height/2, 0.f);
 
 	D3DXMatrixScaling(&S, 1.f, -1.f, 1.f);
+	D3DXMatrixRotationZ(&R, angle);
+
+	D3DXMatrixMultiply(&T, &S, &R);
 	
 	HR(renderer->Begin(
 		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	
-	HR(renderer->SetTransform(&S));
+	HR(renderer->SetTransform(&T));
 	HR(renderer->Draw(texInfos->texture, 0, &center, &GetPosition(), D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
 	
