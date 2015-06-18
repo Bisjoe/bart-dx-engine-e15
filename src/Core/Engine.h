@@ -2,6 +2,7 @@
 
 #include "Common.h"
 #include "Component.h"
+#include "Collider.h"
 //#include "DirectInput.h"
 //#include "GameTimer.h"
 
@@ -31,6 +32,8 @@ public:
 	void Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution);
 	int Run();
 	void Stop();
+
+	
 
 	/**
 		Remove a component from the update list
@@ -85,6 +88,7 @@ private:
 	void OnLostDevice();
 	void Start();
 	void Update();
+	void FixedUpdate();
 	void Draw();
 
 	void CheckNew();

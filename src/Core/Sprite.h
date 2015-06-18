@@ -1,7 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Engine.h"
-#include "Rectangle.h"
+#include "Rectangle2.h"
 
 // Flip shortcuts, lolwut
 #ifndef FLIPPERS
