@@ -9,6 +9,8 @@ Peggle::Peggle()
 
 	Sprite* s = new Sprite(Texture::ELEPHANT_DE_MER);
 	Sprite* s2 = new Sprite(Texture::POW_POW_POW);
+
+	std::cout << s->GetTextureInfos()->infos.Width;
 }
 
 Peggle::~Peggle()

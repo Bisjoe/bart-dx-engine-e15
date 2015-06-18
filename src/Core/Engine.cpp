@@ -64,7 +64,7 @@ void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResoluti
 	//input = new Input();
 	//timer = new Timer();
 
-	textures = new ResourceHolder<IDirect3DTexture9, int>();
+	textures = new ResourceHolder<TextureInfos, int>();
 	//fonts = new ResourceHolder<TTF_Font, int>();
 	//musics = new ResourceHolder<Mix_Music, int>();
 	//sounds = new ResourceHolder<Mix_Chunk, int>();

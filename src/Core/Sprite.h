@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "Engine.h"
 #include "Rectangle.h"
+#include "TextureInfos.h"
 
 // Flip shortcuts, lolwut
 #ifndef FLIPPERS
@@ -41,16 +42,17 @@ public:
 	void Scale(float k);
 
 	// Getters
-	bool IsVisible()			{ return isVisible; }
-	D3DXVECTOR3 GetPosition()	{ return D3DXVECTOR3(dstRect->left, dstRect->top, 0.f); }
-	D3DXVECTOR2 GetSize()		{ return D3DXVECTOR2(dstRect->right, dstRect->bottom); }
+	bool IsVisible()				{ return isVisible; }
+	D3DXVECTOR3 GetPosition()		{ return D3DXVECTOR3(dstRect->left, dstRect->top, 0.f); }
+	D3DXVECTOR2 GetSize()			{ return D3DXVECTOR2(dstRect->right, dstRect->bottom); }
+	TextureInfos* GetTextureInfos() { return texInfos; }
 
 protected:
 	Sprite();
 	void ApplyTexture(ID3DXSprite* const spriteBatch);
 	void ApplyAlpha();
 
-	IDirect3DTexture9* texture;
+	TextureInfos* texInfos;
 	RECT* dstRect;
 	RECT* srcRect;
 	//SDL_RendererFlip flipType;
@@ -59,7 +61,6 @@ protected:
 	float angle;
 	float scaling;
 	bool isVisible;
-
 };
 
 

@@ -6,7 +6,7 @@
 //Shouldn't ever be used directly
 //////////////////////////////
 Sprite::Sprite()
-	: texture(nullptr)
+	: texInfos(nullptr)
 	, isVisible(true)
 	, alpha(255)
 	, angle(0)
@@ -36,7 +36,7 @@ Sprite::Sprite()
 //@id - This is your "Sprite sheet" ID.
 ////////////////////////////////
 Sprite::Sprite(Texture::ID id)
-	: texture(Textures->Get(id))
+	: texInfos(Textures->Get(id))
 	, isVisible(true)
 	, alpha(255)
 	, angle(0)
@@ -47,10 +47,6 @@ Sprite::Sprite(Texture::ID id)
 	srcRect = new RECT();
 	srcRect->left = 0;
 	srcRect->top = 0;
-
-	//D3DXCreateTextureFromFileEx();
-	
-	//SDL_QueryTexture(texture, NULL, NULL, &srcRect->w, &srcRect->h);
 
 	dstRect = new RECT();
 	dstRect->left = srcRect->left;
@@ -67,7 +63,7 @@ Sprite::Sprite(Texture::ID id)
 //@srcSize - The Sprite's width/height
 ////////////////////////////////////////////////////////////////////
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
-	: texture(Textures->Get(id))
+	: texInfos(Textures->Get(id))
 	, isVisible(true)
 	, alpha(255)
 	, angle(0)
@@ -134,7 +130,7 @@ void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	
 	HR(renderer->SetTransform(&S));
-	HR(renderer->Draw(texture, 0, &center, &GetPosition(), D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Draw(texInfos->texture, 0, &center, &GetPosition(), D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
 	
 	HR(renderer->End());

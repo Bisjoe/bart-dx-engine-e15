@@ -2,6 +2,7 @@
 
 #include "Common.h"
 #include "Component.h"
+#include "TextureInfos.h"
 //#include "DirectInput.h"
 //#include "GameTimer.h"
 
@@ -75,7 +76,7 @@ public:
 	//Timer*								GetTimer()		 { return timer;	}
 	//SDL_Renderer*						GetRenderer()	 { return renderer; }
 	//SDL_Window*							GetWindow()		 { return window;	}
-	ResourceHolder<IDirect3DTexture9, int>*	GetTextures()	 { return textures; }
+	ResourceHolder<TextureInfos, int>*	GetTextures()	 { return textures; }
 	//ResourceHolder<TTF_Font, int>*		GetFonts()		 { return fonts;	}
 	//ResourceHolder<Mix_Music, int>*		GetMusics()		 { return musics;	}
 	//ResourceHolder<Mix_Chunk, int>*		GetSounds()		 { return sounds;	}
@@ -95,7 +96,7 @@ private:
 	//Timer*								timer;
 	ID3DXSprite* spriteBatch;
 	//SDL_Window*							window;
-	ResourceHolder<IDirect3DTexture9, int>*	textures;
+	ResourceHolder<TextureInfos, int>*	textures;
 	//ResourceHolder<TTF_Font, int>*		fonts;
 	//ResourceHolder<Mix_Music, int>*		musics;
 	//ResourceHolder<Mix_Chunk, int>*		sounds;

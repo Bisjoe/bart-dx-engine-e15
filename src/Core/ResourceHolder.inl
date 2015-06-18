@@ -9,10 +9,14 @@ ResourceHolder<Resource, Identifier>::ResourceHolder()
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std::string& filename)
 {
-	IDirect3DTexture9* texture;
-	HR(D3DXCreateTextureFromFile(gD3DDevice, filename.c_str(), &texture));
+	TextureInfos* texInfos = new TextureInfos();
 
-	InsertResource(id, std::move(texture));
+	HR(D3DXCreateTextureFromFileEx(gD3DDevice, filename.c_str(), 0, 0, 0, 0,
+		D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT,
+		D3DX_DEFAULT, D3DCOLOR_XRGB(255,255,255), &texInfos->infos, NULL,
+		&texInfos->texture));
+
+	InsertResource(id, std::move(texInfos));
 }
 
 
