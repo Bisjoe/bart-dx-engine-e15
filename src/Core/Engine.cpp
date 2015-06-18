@@ -110,6 +110,24 @@ void Engine::Update()
 	gTimer->Tick();
 }
 
+void Engine::FixedUpdate()
+{
+	if (!Collider::toAdd.empty())
+		CheckNew();
+	if (!Collider::toDelete.empty())
+		CheckDeleted();
+	auto iter = Collider::components.begin();
+	for (; iter != Collider::components.end(); iter++)
+	{
+		if ((*iter)->isActive)
+		{
+			(*iter)->Update();
+		}
+	}
+
+	gTimer->Tick();
+}
+
 void Engine::Draw()
 {
 
