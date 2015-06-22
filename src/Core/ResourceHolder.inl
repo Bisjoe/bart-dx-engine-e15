@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include "ResourceHolder.h"
+#include <irrKlang.h>
 
 template <typename Resource, typename Identifier>
 ResourceHolder<Resource, Identifier>::ResourceHolder()
@@ -20,39 +21,14 @@ void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std:
 }
 
 
-//template <typename Resource, typename Identifier>
-//void ResourceHolder<Resource, Identifier>::LoadSound(Identifier id, const std::string& filename)
-//{
-//	Mix_Chunk* sound;
-//	sound = Mix_LoadWAV(filename.c_str());
-//	//If the sound couldn't be loaded
-//	if (!sound)
-//	{
-//		printf("Sound could not be loaded, ERROR: %s\n", Mix_GetError());
-//	}
-//	else
-//	{
-//		InsertResource(id, std::move(sound));
-//	}
-//}
-//
-//
-//template <typename Resource, typename Identifier>
-//void ResourceHolder<Resource, Identifier>::LoadMusic(Identifier id, const std::string& filename)
-//{
-//	Mix_Music* music;
-//	music = Mix_LoadMUS(filename.c_str());
-//	//If the music couldn't be loaded
-//	if (!music)
-//	{
-//		printf("Music could not be loaded, ERROR: %s\n", Mix_GetError());
-//	}
-//	else {
-//		InsertResource(id, std::move(music));
-//	}
-//}
-//
-//
+template <typename Resource, typename Identifier>
+void ResourceHolder<Resource, Identifier>::LoadSound(Identifier id, const std::string& filename)
+{
+	irrklang::ISoundSource* sound = gEngine->GetSoundEngine()->addSoundSourceFromFile(filename.c_str());
+	if (sound)
+		InsertResource(id, std::move(sound));
+}
+
 //template <typename Resource, typename Identifier>
 //void ResourceHolder<Resource, Identifier>::LoadFont(Identifier id, const std::string& filename, int fontSize)
 //{

@@ -3,7 +3,7 @@
 extern Engine* gEngine = 0;
 
 Engine::Engine()
-	//:window(nullptr)
+	//: window(nullptr)
 	//, audio(nullptr)
 	//, input(nullptr)
 	//, renderer(nullptr)
@@ -17,10 +17,8 @@ Engine::Engine()
 
 }
 Engine::Engine(HINSTANCE hInstance, std::string winCaption)
-	: App(hInstance
-	, winCaption
-	, D3DDEVTYPE_HAL
-	, D3DCREATE_HARDWARE_VERTEXPROCESSING)
+	: App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING)
+	, soundEngine(nullptr)
 {
 	gApp = this;
 }
@@ -39,15 +37,16 @@ Engine::~Engine()
 	//delete timer;
 	//timer = nullptr;
 	//
-	//delete audio;
-	//audio = nullptr;
-	//
 	//textures = nullptr;
 	//musics = nullptr;
 	//sounds = nullptr;
 	//fonts = nullptr;
 	//
 	//SDL_Quit();
+
+	// Clearing the Sound Engine
+	soundEngine->drop();
+	soundEngine = nullptr;
 }
 
 void Engine::Init()
@@ -58,17 +57,31 @@ void Engine::Init()
 
 void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution) 
 {
+	// ==================================
+	// ----------------------------------
 	D3DXCreateSprite(gD3DDevice, &spriteBatch);
 
-	//audio = new Audio();
+	// ==================================
+	// Audio System
+	// ----------------------------------
+	soundEngine = irrklang::createIrrKlangDevice();
+	if (!soundEngine)
+		std::cout << "Engine system was not initialized" << std::endl;
+
+	// ==================================
+	// ----------------------------------
 	//input = new Input();
 	//timer = new Timer();
 
+	// ==================================
+	// Resource Holder
+	// ----------------------------------
 	textures = new ResourceHolder<TextureInfos, int>();
 	//fonts = new ResourceHolder<TTF_Font, int>();
-	//musics = new ResourceHolder<Mix_Music, int>();
-	//sounds = new ResourceHolder<Mix_Chunk, int>();
+	sounds = new ResourceHolder<irrklang::ISoundSource, int>();
 
+	// ==================================
+	// ----------------------------------
 	//if (NativeResolution.x != 0 && NativeResolution.y != 0)
 	//{
 	//	this->scaling.x = (screenWidth / NativeResolution.x);

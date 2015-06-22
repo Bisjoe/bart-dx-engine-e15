@@ -1,7 +1,6 @@
 #ifndef ResourcesID
 #define ResourcesID
 
-
 namespace Texture
 {
 	enum ID
@@ -11,22 +10,15 @@ namespace Texture
 	};
 }
 
-//namespace Sound
-//{
-//	enum ID
-//	{
-//		EnemyHit
-//	};
-//}
-//
-//namespace Music
-//{
-//	enum ID
-//	{
-//		TestMusic
-//	};
-//}
-//
+namespace Sound
+{
+	enum ID
+	{
+		TestMusicID,
+		TestSoundFXID
+	};
+}
+
 //namespace Font
 //{
 //	enum ID

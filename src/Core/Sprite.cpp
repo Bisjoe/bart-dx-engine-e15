@@ -1,10 +1,9 @@
 #include "Sprite.h"
 
-//////////////////////////////
-//Default Sprite constructor//
-//////////////////////////////
-//Shouldn't ever be used directly
-//////////////////////////////
+/* Default Sprite constructor
+ * ------------------------
+ * Shouldn't ever be used directly
+ */
 Sprite::Sprite()
 	: texInfos(nullptr)
 	, isVisible(true)
@@ -28,13 +27,15 @@ Sprite::Sprite()
 	dstRect->right = 0;
 }
 
-////////////////////////////////
-//Sprite (Texture) constructor//
-////////////////////////////////
-//This'll create a sprite out of a texture.
-//This is suited for any non-animated images like a game's HUD, Map or "Title Screen".
-//@id - This is your "Sprite sheet" ID.
-////////////////////////////////
+
+/* Sprite (Texture) constructor
+ * ------------------------
+ * This'll create a sprite out of a texture.
+ * This is suited for any non-animated images like a game's HUD, Map or "Title Screen".
+ * ------------------------
+ * @id - This is your "Sprite sheet" ID.
+ */
+
 Sprite::Sprite(Texture::ID id)
 	: texInfos(Textures->Get(id))
 	, isVisible(true)
@@ -53,15 +54,16 @@ Sprite::Sprite(Texture::ID id)
 	dstRect->top = srcRect->top;
 }
 
-/////////////////////////////////////////////////////
-//Sprite (Texture & Sprite Coordinates) constructor//meow
-/////////////////////////////////////////////////////
-//This'll create a sprite out of a texture's using specific coordinates.
-//This is suited for all actors (Tiles, Characters, Enemies...)
-//@id - This is your "Sprite sheet" ID.
-//@srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
-//@srcSize - The Sprite's width/height
-////////////////////////////////////////////////////////////////////
+
+/* Sprite (Texture & Sprite Coordinates) 
+ * ------------------------
+ * This'll create a sprite out of a texture's using specific coordinates.
+ * This is suited for all actors (Tiles, Characters, Enemies...)
+ * ------------------------
+ * @id - This is your "Sprite sheet" ID.
+ * @srcPos - The Sprite's starting (X,Y) position from the Sprite Sheet
+ * @srcSize - The Sprite's width/height
+ */
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
 	: texInfos(Textures->Get(id))
 	, isVisible(true)
@@ -142,13 +144,14 @@ void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 }
 
 
-//////////////////
-//Sprite Scaling//
-//////////////////
-//This'll scale a sprite by the desired K factor.
-//ScaleBy(1) will reset the texture back to its original file's size.
-//@k - Scaling factor
-////////////////////////////////////////////////////////////////////
+
+/* Sprite Scaling
+ * ------------------------
+ * This'll scale a sprite by the desired K factor.
+ * ScaleBy(1) will reset the texture back to its original file's size.
+ * ------------------------
+ * @k - Scaling factor
+ */
 void Sprite::Scale(float k)
 {
 	//SDL_QueryTexture(texture, NULL, NULL, &dstRect->w, &dstRect->h);
@@ -157,39 +160,40 @@ void Sprite::Scale(float k)
 	scaling = k;
 }
 
-///////////////////
-//Sprite Resizing//
-///////////////////
-//This'll manually resize a sprite to your desired size.
-//This will not modify your sprite's sourcing.
-//@w - Desired sprite width
-//@h - Desired sprite height
-////////////////////////////////////////////////////////
+
+/* Sprite Resizing
+ * ------------------------
+ * This'll manually resize a sprite to your desired size.
+ * This will not modify your sprite's sourcing.
+ * ------------------------
+ * @w - Desired sprite width
+ * @h - Desired sprite height
+ */
 void Sprite::ResizeTo(int w, int h)
 {
 	dstRect->right = w;
 	dstRect->bottom = h;
 }
 
-///////////////////
-//Sprite Flipping//
-///////////////////
+
+/* Sprite Flipping
+ */
 void Sprite::Flip(unsigned int flip)
 {
 	//this->flipType = (SDL_RendererFlip)flip;
 }
 
-///////////////////
-//Sprite Rotation//
-///////////////////
+
+/* Sprite Rotation
+ */
 void Sprite::SetRotation(float angle)
 {
 	this->angle = angle;
 }
 
-//////////////////////
-//Sprite Rotation By//
-//////////////////////
+
+/* Sprite Rotation By
+ */
 void Sprite::RotateBy(float angle)
 {
 	this->angle += angle;
