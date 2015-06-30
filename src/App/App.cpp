@@ -22,7 +22,7 @@ App::App()
 }
 
 App::App(HINSTANCE hInstance, std::string winCaption,
-	D3DDEVTYPE devType, DWORD requestVP)
+	D3DDEVTYPE devType, DWORD requestVP, int screenWidth, int screenHeight)
 	: mMainWindowCaption(winCaption)
 	, mhMainWindow(0)
 	, mhAppInstance(hInstance)
@@ -49,7 +49,7 @@ App::App(HINSTANCE hInstance, std::string winCaption,
 	}
 #endif
 
-	InitMainWindow();
+	InitMainWindow(screenWidth, screenHeight);
 	InitDirect3D();
 }
 
@@ -59,7 +59,7 @@ App::~App()
 	ReleaseCOM(mD3DObject);
 }
 
-void App::InitMainWindow()
+void App::InitMainWindow(int screenWidth, int screenHeight)
 {
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -79,7 +79,7 @@ void App::InitMainWindow()
 		PostQuitMessage(0);
 	}
 
-	RECT r = { 0, 0, 800, 600 };
+	RECT r = { 0, 0, screenWidth, screenHeight };
 
 	mhMainWindow = CreateWindow(
 		wc.lpszClassName,

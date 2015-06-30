@@ -8,7 +8,7 @@ class App
 public:
 	App();
 	App(HINSTANCE hInstance, std::string winCaption,
-		D3DDEVTYPE devType, DWORD requestVP);
+		D3DDEVTYPE devType, DWORD requestVP, int screenWidth, int screenHeight);
 	virtual ~App();
 
 	HWND GetMainWindow() { return mhMainWindow; }
@@ -21,7 +21,7 @@ public:
 	D3DPRESENT_PARAMETERS GetParam() { return mD3Dpp; }
 
 protected:
-	virtual void InitMainWindow();
+	virtual void InitMainWindow(int screenWidth, int screenHeight);
 	virtual void InitDirect3D();
 	virtual bool CheckDeviceCaps() { return true; }
 	virtual void OnResetDevice() {}
