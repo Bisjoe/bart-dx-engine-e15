@@ -26,11 +26,11 @@ class Engine: App
 
 public:
 	Engine();
-	Engine(HINSTANCE hInstance, std::string winCaption);
+	Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth = DEFAULT_WIN_W, int screenHeight = DEFAULT_WIN_H);
 	~Engine();
 
 	void Init();
-	void Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution);
+	void Init(D3DXVECTOR2* nativeResolution);
 	int Run();
 	void Stop();
 
@@ -47,6 +47,7 @@ public:
 
 	ID3DXSprite*									GetSpriteBatch() { return spriteBatch; }
 	irrklang::ISoundEngine*							GetSoundEngine() { return soundEngine; }
+	D3DXVECTOR2										GetScreenSize()  { return screenSize;  }
 	//Audio*										GetAudio()		 { return audio;	}
 	//Input*										GetInput()		 { return input;	}
 	//Timer*										GetTimer()		 { return timer;	}
@@ -66,6 +67,7 @@ private:
 	void CheckNew();
 	void CheckDeleted();
 
+	D3DXVECTOR2										screenSize;
 	irrklang::ISoundEngine*							soundEngine;
 	//Input*										input;
 	//Timer*										timer;

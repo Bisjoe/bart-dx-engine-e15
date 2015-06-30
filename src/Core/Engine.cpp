@@ -16,8 +16,10 @@ Engine::Engine()
 {
 
 }
-Engine::Engine(HINSTANCE hInstance, std::string winCaption)
-	: App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING)
+
+Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int screenHeight)
+	: screenSize(screenWidth, screenHeight)
+	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
 {
 	gApp = this;
@@ -52,10 +54,10 @@ Engine::~Engine()
 void Engine::Init()
 {
 	D3DXVECTOR2 res(0.f, 0.0f);
-	Init(DEFAULT_WIN_W, DEFAULT_WIN_H, &res);
+	Init(&res);
 }
 
-void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResolution) 
+void Engine::Init(D3DXVECTOR2* nativeResolution) 
 {
 	// ==================================
 	// ----------------------------------
@@ -66,7 +68,7 @@ void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResoluti
 	// ----------------------------------
 	soundEngine = irrklang::createIrrKlangDevice();
 	if (!soundEngine)
-		std::cout << "Engine system was not initialized" << std::endl;
+		std::cout << "Sound engine was not initialized" << std::endl;
 
 	// ==================================
 	// ----------------------------------
@@ -84,8 +86,8 @@ void Engine::Init(int screenWidth, int screenHeight, D3DXVECTOR2* nativeResoluti
 	// ----------------------------------
 	//if (NativeResolution.x != 0 && NativeResolution.y != 0)
 	//{
-	//	this->scaling.x = (screenWidth / NativeResolution.x);
-	//	this->scaling.y = (screenHeight / NativeResolution.y);
+	//	this->scaling.x = (screenSize.x / NativeResolution.x);
+	//	this->scaling.y = (screenSize.y / NativeResolution.y);
 	//}
 }
 
