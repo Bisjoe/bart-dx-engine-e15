@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\Core;..\App;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\Libs\irrKlang-1.5.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;..\Libs\irrKlang-1.5.0\lib\Win32-visualStudio;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\Core;..\App;..\..\dependencies\irrKlang-1.5.0\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dependencies\irrKlang-1.5.0\lib\Win32-visualStudio;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

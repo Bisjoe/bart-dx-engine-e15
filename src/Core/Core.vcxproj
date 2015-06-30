@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\App;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;H:\GitHub\bart-dx-engine-e15\src\Libs\irrKlang-1.5.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;H:\GitHub\bart-dx-engine-e15\src\Libs\irrKlang-1.5.0\lib\Win32-visualStudio;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\App;..\..\dependencies\irrKlang-1.5.0\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dependencies\irrKlang-1.5.0\lib\Win32-visualStudio;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>..\App;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
