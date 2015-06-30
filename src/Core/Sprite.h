@@ -46,7 +46,7 @@ public:
 	void ResizeTo(int w, int h);
 	void Flip(unsigned int flip);
 	void SetRotation(float yaw, float pitch, float roll) { D3DXMatrixRotationYawPitchRoll(&mRotation, yaw, pitch, roll); }
-	void SetPivot(D3DXVECTOR3 center){ mCenter = center; }
+	void SetPivot(D3DXVECTOR3 *center){ mCenter = center; }
 	void Scale(float k);
 
 	// Methods
@@ -70,7 +70,7 @@ protected:
 	float scaling;
 	bool isVisible;
 
-	D3DXVECTOR3 mCenter;
+	D3DXVECTOR3 *mCenter;
 	D3DXMATRIX mRotation;
 	D3DXMATRIX mTranslation;
 };

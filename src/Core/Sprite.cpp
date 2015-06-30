@@ -6,7 +6,7 @@
  */
 Sprite::Sprite()
 	: texInfos(nullptr)
-	, mCenter(0.0f, 0.0f, 0.0f)
+	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -36,7 +36,7 @@ Sprite::Sprite()
 
 Sprite::Sprite(Texture::ID id)
 	: texInfos(Textures->Get(id))
-	, mCenter(0.0f, 0.0f, 0.0f)
+	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -67,7 +67,7 @@ Sprite::Sprite(Texture::ID id)
  */
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
 	: texInfos(Textures->Get(id))
-	, mCenter(0.0f, 0.0f, 0.0f)
+	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -125,7 +125,7 @@ void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
 	HR(renderer->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	HR(renderer->SetTransform(&(mRotation * mTranslation)));
-	HR(renderer->Draw(texInfos->texture, 0, &mCenter, 0, D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Draw(texInfos->texture, 0, mCenter, 0, D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
 	HR(renderer->End());
 }
