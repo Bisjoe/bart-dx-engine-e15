@@ -18,6 +18,8 @@ public:
 	virtual int Run();
 	virtual void Stop(){}
 
+	D3DPRESENT_PARAMETERS GetParam() { return mD3Dpp; }
+
 protected:
 	virtual void InitMainWindow();
 	virtual void InitDirect3D();
