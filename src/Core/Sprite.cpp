@@ -6,13 +6,14 @@
  */
 Sprite::Sprite()
 	: texInfos(nullptr)
+	, mCenter(0.0f, 0.0f, 0.0f)
 	, isVisible(true)
 	, alpha(255)
-	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
 	//, flipType (SDL_FLIP_NONE)
 {
+	D3DXMatrixIdentity(&mRotation);
 
 	srcRect = new RECT();
 	srcRect->left = 0;
@@ -21,10 +22,7 @@ Sprite::Sprite()
 	srcRect->right = 0;
 
 	dstRect = new RECT();
-	dstRect->left = 0;
-	dstRect->top = 0;
-	dstRect->bottom = 0;
-	dstRect->right = 0;
+	SetDstFrame(0, 0, 0, 0);
 }
 
 
@@ -38,20 +36,23 @@ Sprite::Sprite()
 
 Sprite::Sprite(Texture::ID id)
 	: texInfos(Textures->Get(id))
+	, mCenter(0.0f, 0.0f, 0.0f)
 	, isVisible(true)
 	, alpha(255)
-	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
 	//, flipType(SDL_FLIP_NONE)
 {
+	D3DXMatrixIdentity(&mRotation);
+
 	srcRect = new RECT();
 	srcRect->left = 0;
 	srcRect->top = 0;
 
 	dstRect = new RECT();
-	dstRect->left = srcRect->left;
-	dstRect->top = srcRect->top;
+	SetDstFrame(srcRect->left, srcRect->top, 0, 0);
+
+	// Attention en appellant ce constructeur, aucun width ou height de destination n'est set...
 }
 
 
@@ -66,13 +67,15 @@ Sprite::Sprite(Texture::ID id)
  */
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
 	: texInfos(Textures->Get(id))
+	, mCenter(0.0f, 0.0f, 0.0f)
 	, isVisible(true)
 	, alpha(255)
-	, angle(0)
 	, srcRect(0)
 	, dstRect(0)
 	//, flipType(SDL_FLIP_NONE)
 {
+	D3DXMatrixIdentity(&mRotation);
+
 	srcRect = new RECT();
 	srcRect->left = srcPos->x;
 	srcRect->top = srcPos->y;
@@ -80,10 +83,7 @@ Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR
 	srcRect->bottom = srcSize->y;
 
 	dstRect = new RECT();
-	dstRect->left = 0;
-	dstRect->top = 0;
-	dstRect->right = srcSize->x;
-	dstRect->bottom = srcSize->y;
+	SetDstFrame(0, 0, srcSize->x, srcSize->y);
 }
 
 Sprite::~Sprite()
@@ -123,23 +123,10 @@ void Sprite::ApplyAlpha()
 
 void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
-	D3DXMATRIX S;
-	D3DXMATRIX R;
-	D3DXMATRIX T;
-	D3DXVECTOR3 center(texInfos->infos.Width/2, texInfos->infos.Height/2, 0.f);
-
-	D3DXMatrixScaling(&S, 1.f, -1.f, 1.f);
-	D3DXMatrixRotationZ(&R, angle);
-
-	D3DXMatrixMultiply(&T, &S, &R);
-	
-	HR(renderer->Begin(
-		D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
-	
-	HR(renderer->SetTransform(&T));
-	HR(renderer->Draw(texInfos->texture, 0, &center, &GetPosition(), D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
+	HR(renderer->SetTransform(&(mRotation * mTranslation)));
+	HR(renderer->Draw(texInfos->texture, 0, &mCenter, 0, D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
-	
 	HR(renderer->End());
 }
 
@@ -181,21 +168,5 @@ void Sprite::ResizeTo(int w, int h)
 void Sprite::Flip(unsigned int flip)
 {
 	//this->flipType = (SDL_RendererFlip)flip;
-}
-
-
-/* Sprite Rotation
- */
-void Sprite::SetRotation(float angle)
-{
-	this->angle = angle;
-}
-
-
-/* Sprite Rotation By
- */
-void Sprite::RotateBy(float angle)
-{
-	this->angle += angle;
 }
 
