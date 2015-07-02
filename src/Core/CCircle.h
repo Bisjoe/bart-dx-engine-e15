@@ -7,10 +7,6 @@ class CRectangle;
 
 class CCircle : public Collider
 {
-private:
-	//Our CCircle's radius
-	float radius;
-
 public:
 	//Our defaults
 	CCircle();
@@ -32,6 +28,11 @@ public:
 	//Returns whether our CCircle collides with a rectangle, and vice versa.
 	bool CollidesWith(CRectangle* const rect); //Bonus
 	bool CheckCollision(Collider* const collider);
+
+private:
+	//Our CCircle's radius
+	float radius;
+
 };
 
 #endif

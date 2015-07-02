@@ -9,10 +9,10 @@ CRectangle::CRectangle()
 }
 
 //Default Constructor, everything's a zero.
-CRectangle::CRectangle(Component* comp, Type type, float x, float y)
-	:Collider(comp, Type::RECTANGLE, x, y)
-	, width(5)
-	, height(5)
+CRectangle::CRectangle(Component* caller, float x, float y)
+	:Collider(caller, Type::RECTANGLE, x, y)
+	, width(0)
+	, height(0)
 {
 }
 
@@ -37,10 +37,10 @@ CRectangle::~CRectangle()
 ////|//////////////////////|/////////////////////
 ////!----------------------!(X+Width, Y-Height)//
 ////////////Width////////////////////////////////
-CRectangle::CRectangle(float x, float y, float width, float height)
-	: Collider(nullptr, Type::RECTANGLE, x, y),
-	width(abs(width)),
-	height(abs(height))
+CRectangle::CRectangle(Component* caller, float x, float y, float width, float height)
+	: Collider(nullptr, Type::RECTANGLE, x, y)
+	,width(abs(width))
+	,height(abs(height))
 {
 	return;
 }
@@ -50,7 +50,7 @@ CRectangle::CRectangle(float x, float y, float width, float height)
 // Please keep in mind if a point was ON one of the CRectangle's border, it will be considered as WITHIN the CRectangle.
 bool CRectangle::Contains(const float x, const float y)
 {
-	//return (x >= this->GetX() && x <= (this->GetX() + this->GetWidth()) && y >= this->GetY() && y <= (this->GetY() + this->GetHeight()));
+	return (x >= this->GetX() && x <= (this->GetX() + this->GetWidth()) && y >= this->GetY() && y <= (this->GetY() + this->GetHeight()));
 	return false;
 }
 
