@@ -14,7 +14,7 @@ Peggle::Peggle()
 	Sprite* s = new Sprite(Texture::ELEPHANT_DE_MER);
 
 	D3DXVECTOR3 center(s->GetTextureInfos()->infos.Width / 2, s->GetTextureInfos()->infos.Height / 2, 0.0f);
-	s->SetPivot(center);
+	//s->SetPivot(center);
 	s->SetRotation(0.0, 0.0, D3DX_PI/2);
 
 	Sprite* s2 = new Sprite(Texture::POW_POW_POW);

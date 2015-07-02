@@ -27,6 +27,7 @@ private:
 	static std::vector<Component*> toDelete;
 	static std::vector<Component*> removed;
 
+	std::string name;
 	bool isActive;
 };
 
