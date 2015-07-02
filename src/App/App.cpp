@@ -241,9 +241,6 @@ int App::Run()
 
 	while (msg.message != WM_QUIT)
 	{
-		gDInput->poll();
-		gTimer->Tick();
-
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
@@ -259,6 +256,9 @@ int App::Run()
 
 			if (!GetDeviceLost())
 			{
+				gDInput->poll();
+				gTimer->Tick();
+
 				Update();
 				PreDraw();
 			}
