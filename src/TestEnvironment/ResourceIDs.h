@@ -1,12 +1,24 @@
 #ifndef ResourcesID
 #define ResourcesID
 
+namespace Components
+{
+	enum ID
+	{
+		UNDEFINED,
+		Ball,
+		Block,
+	};
+}
+
 namespace Texture
 {
 	enum ID
 	{
 		ELEPHANT_DE_MER,
-		POW_POW_POW
+		POW_POW_POW,
+		Ball,
+		Block
 	};
 }
 

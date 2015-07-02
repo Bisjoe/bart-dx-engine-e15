@@ -19,6 +19,7 @@ namespace Font { enum ID; }
 namespace Music { enum ID; }
 namespace Sound { enum ID; }
 
+
 template <typename Resource, typename Identifier>
 class ResourceHolder
 {

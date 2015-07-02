@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+namespace Components { enum ID; }
+
 class Component
 {
 friend class Engine;
@@ -14,11 +16,15 @@ public:
 	virtual void Update(){} //= 0;
 	virtual void Draw()	 {} //= 0;
 	virtual void Stop()  {} //= 0;
-	virtual void Kill()  {} //= 0;
+	virtual void Kill()  {}
 	virtual void OnResetDevice() {}
 	virtual void OnLostDevice()  {}
 
 	virtual void SetActive(bool toggle) { isActive = toggle; };
+
+	//This is ugly, I'd rather not have strings though, find something else.
+	void SetID(Components::ID id) { this->id = id; }
+	const Components::ID GetID() { return id; }
 
 private:
 	// Components vectors
@@ -27,7 +33,7 @@ private:
 	static std::vector<Component*> toDelete;
 	static std::vector<Component*> removed;
 
-	std::string name;
+	Components::ID id;
 	bool isActive;
 };
 

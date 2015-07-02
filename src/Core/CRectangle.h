@@ -12,7 +12,6 @@ public:
 	~CRectangle();
 
 	//Our 'specials' constructors.
-	CRectangle(Component* caller, float x, float y);
 	CRectangle(Component* caller, float x, float y, float width, float height);
 
 	//Wheter or not a point is contained within a rectangle, considers points ON the rectangle as part of the rectangle.
