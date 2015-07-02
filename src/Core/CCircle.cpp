@@ -24,7 +24,7 @@ CCircle::CCircle(Component* caller, float x, float y, float radius)
 // Points ON the Circle's border are considered to be part of the CCircle
 bool CCircle::Contains(const float x, const float y)
 {
-	return (pow(x - this->x, 2) + pow(y - this->y, 2)) <= pow(this->radius, 2);
+	return (pow(x - this->GetPosition().x, 2) + pow(y - this->GetPosition().y, 2)) <= pow(this->radius, 2);
 }
 
 
@@ -32,7 +32,7 @@ bool CCircle::Contains(const float x, const float y)
 bool CCircle::CollidesWith(CCircle* const circ)
 {
 	
-	return (pow(circ->GetX() - this->GetX(), 2) + pow(circ->GetY() - this->GetY(), 2)) <= pow(this->GetRadius() + circ->GetRadius(), 2);
+	return (pow(circ->GetPosition().x - this->GetPosition().x, 2) + pow(circ->GetPosition().y - this->GetPosition().y, 2)) <= pow(this->GetRadius() + circ->GetRadius(), 2);
 }
 
 
@@ -41,20 +41,20 @@ bool CCircle::CollidesWith(CCircle* const circ)
 bool CCircle::CollidesWith(CRectangle* const rect)
 {
 	//We're using a vector2D to store the X and Y distance positions of the circle
-	Vector2D circleDistance;
+	D3DXVECTOR2 circleDistance;
 	//We're storing the rectangle's center coordinate, minus its actual position, so let's consider it it's relative center?
 	//Alternatively you might consider it the super vector of HalfRectangleWidth and HalfRectangleHeight... weee!!!
-	Vector2D rectCenter;
+	D3DXVECTOR2 rectCenter;
 	rectCenter.x = rect->GetWidth() / 2;
 	rectCenter.y = rect->GetHeight() / 2;
 
 	//Self-Explaining boolean
-	bool areColliding;
+	bool areColliding = false;
 
 	//This part is really nifty, by getting the absolute value of the distance of the circle's center and the rectangle's center...
 	//We only have to do math once instead of four time. That's the magic of axis aligned rectangles
-	circleDistance.x = fabs(this->x - (rect->GetX() + rectCenter.x));
-	circleDistance.y = fabs(this->y - (rect->GetY() + rectCenter.y));
+	circleDistance.x = fabs(this->position.x - (rect->GetPosition().x + rectCenter.x));
+	circleDistance.y = fabs(this->position.y - (rect->GetPosition().y + rectCenter.y));
 
 	//We're storing the squared distance of the circle's from the rectangle, minus half the rectangle's size.
 	//It's gonna be really useful when calculating wheter or not the corner is colliding with the circle. Trust me.

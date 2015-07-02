@@ -41,7 +41,7 @@ CRectangle::CRectangle(Component* caller, float x, float y, float width, float h
 // Please keep in mind if a point was ON one of the Rectangle's border, it will be considered as WITHIN the Rectangle.
 bool CRectangle::Contains(const float x, const float y)
 {
-	return (x >= this->GetX() && x <= (this->GetX() + this->GetWidth()) && y >= this->GetY() && y <= (this->GetY() + this->GetHeight()));
+	return (x >= this->GetPosition().x && x <= (this->GetPosition().x + this->GetWidth()) && y >= this->GetPosition().y && y <= (this->GetPosition().y + this->GetHeight()));
 }
 
 
@@ -62,8 +62,8 @@ void CRectangle::SetSize(float w, float h)
 bool CRectangle::CollidesWith(CRectangle* const rect)
 {
 	bool areColliding = false;
-	if (this->GetX() < (rect->GetX() + rect->GetWidth()) && (this->GetX() + this->GetWidth()) > rect->GetX() &&
-		this->GetY() < (rect->GetY() + rect->GetHeight()) && (this->GetY() + this->GetHeight())> rect->GetY())
+	if (this->GetPosition().x < (rect->GetPosition().x + rect->GetWidth()) && (this->GetPosition().x + this->GetWidth()) > rect->GetPosition().x &&
+		this->GetPosition().y < (rect->GetPosition().y + rect->GetHeight()) && (this->GetPosition().y + this->GetHeight())> rect->GetPosition().y)
 	{
 		areColliding = true;
 	}

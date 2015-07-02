@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
+#include "Utils.h"
 #include <math.h>
-#include "Vector.h"
 #include <iostream>
 #include "Component.h"
 
@@ -21,13 +21,11 @@ public:
 	~Collider();
 
 	//Getters
-	float GetX(){ return x; }
-	float GetY(){ return y; }
+	D3DXVECTOR2 GetPosition() { return position; }
 	Component* GetGameObject() { return gameObject; }
 	const Type GetType() { return type; }
 
 	//Setters
-	void SetPosition(const Vector2D* const vect);
 	void SetPosition(const float x, const float y);
 
 	//Checks if a point is contained within the collider
@@ -42,7 +40,7 @@ public:
 
 
 protected:
-	float x, y;
+	D3DXVECTOR2 position;
 
 private:
 	//Holds a pointer to the object that own this collider. It's the most crucial part.

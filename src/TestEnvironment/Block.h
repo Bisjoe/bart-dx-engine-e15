@@ -11,6 +11,7 @@ public:
 	Block();
 	~Block();
 
+	void Update();
 	//Called when a ball hits the block
 	void Shout();
 

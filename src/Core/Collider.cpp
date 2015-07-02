@@ -11,8 +11,7 @@ Collider::Collider()
 Collider::Collider(Component* gameObject, Type type, float x, float y)
 	:type(type)
 	,gameObject(gameObject)
-	,x(x)
-	,y(y)
+	,position(x, y)
 {
 	colliders.push_back(this);
 }
@@ -20,6 +19,13 @@ Collider::Collider(Component* gameObject, Type type, float x, float y)
 Collider::~Collider()
 {
 
+}
+
+
+void Collider::SetPosition(const float x, const float y)
+{
+	this->position.x = x;
+	this->position.y = y;
 }
 
 std::vector<Collider*> Collider::LookForCollisions()
