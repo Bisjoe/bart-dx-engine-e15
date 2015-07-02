@@ -66,7 +66,7 @@ bool CCircle::CollidesWith(CRectangle* const rect)
 		areColliding = false;
 	}
 	//Cases where the circle is close enough to the rectangle in any direction, collision.
-	else if ((circleDistance.x <= (rectCenter.x)) && (circleDistance.y <= (rectCenter.y)))
+	else if ((circleDistance.x <= (rectCenter.x)) || (circleDistance.y <= (rectCenter.y)))
 	{
 		areColliding = true;
 	}

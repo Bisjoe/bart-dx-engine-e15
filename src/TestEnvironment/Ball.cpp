@@ -8,7 +8,8 @@ Ball::Ball()
 	//Circle Collider at (0, 0) with a radius of 8.0;
 	this->SetID(Components::Ball);
 	D3DXVECTOR3 center(this->GetTextureInfos()->infos.Width / 2, this->GetTextureInfos()->infos.Height / 2, 0.0f);
-	collider = new CCircle(this, center.x, center.y, 8.f);
+	collider = new CCircle(this, 0, 0, 8.f);
+	//std::cout << "Circle Center X: " << center.x << " Circle Center Y: " << center.y;
 	this->SetPivot(center);
 	this->SetRotationDeg(0, 0, 0);
 }
@@ -21,7 +22,7 @@ Ball::~Ball()
 void Ball::Update()
 {
 	//Press C to check if there is a collision
-	if (gDInput->keyPressed(DIK_C))
+	if (gDInput->keyDown(DIK_C))
 	{
 		//Go through each collider collided with though the LookForCollision Function
 		for each (Collider* col in collider->LookForCollisions())
@@ -61,8 +62,8 @@ void Ball::Update()
 	//Press A for the circle's position
 	if (gDInput->keyPressed(DIK_A))
 	{
-		std::cout << "Circle X:" << collider->GetPosition().x << std::endl;
-		std::cout << "Circle Y:" << collider->GetPosition().y << std::endl;
-		std::cout << "Circle Radius:" << collider->GetRadius() << std::endl;
+		std::cout << "Circle X: " << GetPosition().x << " Circle Y: " << GetPosition().y << std::endl;
+		std::cout << "Collider X: " << collider->GetPosition().x << " Collider Y: " << collider->GetPosition().y << std::endl;
+		std::cout << "Collider Radius:" << collider->GetRadius() << std::endl;
 	}
 }
