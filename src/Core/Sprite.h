@@ -19,7 +19,7 @@ public:
 	Sprite(Texture::ID id);
 	Sprite(Texture::ID id, int x, int y);
 	Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize);
-	~Sprite();
+	virtual ~Sprite();
 
 	// Getters
 	bool IsVisible()				{ return isVisible; }
