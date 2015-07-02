@@ -6,7 +6,7 @@
  */
 Sprite::Sprite()
 	: texInfos(nullptr)
-	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	, mPivot(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -36,7 +36,7 @@ Sprite::Sprite()
 
 Sprite::Sprite(Texture::ID id)
 	: texInfos(Textures->Get(id))
-	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	, mPivot(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -50,12 +50,12 @@ Sprite::Sprite(Texture::ID id)
 	srcRect->top = 0;
 
 	dstRect = new RECT();
-	SetDstFrame(srcRect->left, srcRect->top, texInfos->infos.Width, texInfos->infos.Height);
+	SetDstFrame(srcRect->left, srcRect->top, texInfos->infos.Width, texInfos->infos.Height * 0.5f);
 }
 
 Sprite::Sprite(Texture::ID id, int x, int y)
 	: texInfos(Textures->Get(id))
-	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	, mPivot(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -84,7 +84,7 @@ Sprite::Sprite(Texture::ID id, int x, int y)
  */
 Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize)
 	: texInfos(Textures->Get(id))
-	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	, mPivot(D3DXVECTOR3(0.0f, 0.0f, 0.0f))
 	, isVisible(true)
 	, alpha(255)
 	, srcRect(0)
@@ -95,7 +95,7 @@ Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR
 
 	srcRect = new RECT();
 	srcRect->left = srcPos->x;
-	srcRect->top = srcPos->y;
+	srcRect->top = srcSize->y;
 	srcRect->right = srcSize->x;
 	srcRect->bottom = srcSize->y;
 
@@ -142,7 +142,7 @@ void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
 	HR(renderer->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	HR(renderer->SetTransform(&(mRotation * mTranslation)));
-	HR(renderer->Draw(texInfos->texture, 0, mCenter, 0, D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Draw(texInfos->texture, 0, &mPivot, 0, D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
 	HR(renderer->End());
 }
@@ -163,22 +163,6 @@ void Sprite::Scale(float k)
 	//dstRect->bottom = (int)(srcRect->bottom*k);
 	scaling = k;
 }
-
-
-/* Sprite Resizing
- * ------------------------
- * This'll manually resize a sprite to your desired size.
- * This will not modify your sprite's sourcing.
- * ------------------------
- * @w - Desired sprite width
- * @h - Desired sprite height
- */
-void Sprite::ResizeTo(int w, int h)
-{
-	dstRect->right = w;
-	dstRect->bottom = h;
-}
-
 
 /* Sprite Flipping
  */
