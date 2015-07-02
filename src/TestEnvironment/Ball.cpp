@@ -63,5 +63,6 @@ void Ball::Update()
 	{
 		std::cout << "Circle X:" << collider->GetPosition().x << std::endl;
 		std::cout << "Circle Y:" << collider->GetPosition().y << std::endl;
+		std::cout << "Circle Radius:" << collider->GetRadius() << std::endl;
 	}
 }

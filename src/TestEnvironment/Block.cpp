@@ -33,5 +33,7 @@ void Block::Update()
 	{
 		std::cout << "Rectangle X:" << collider->GetPosition().x << std::endl;
 		std::cout << "Rectangle Y:" << collider->GetPosition().y << std::endl;
+		std::cout << "Rectangle Width:" << collider->GetWidth() << std::endl;
+		std::cout << "Rectangle Height:" << collider->GetHeight() << std::endl;
 	}
 }
