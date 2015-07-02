@@ -50,9 +50,26 @@ Sprite::Sprite(Texture::ID id)
 	srcRect->top = 0;
 
 	dstRect = new RECT();
-	SetDstFrame(srcRect->left, srcRect->top, 0, 0);
+	SetDstFrame(srcRect->left, srcRect->top, texInfos->infos.Width, texInfos->infos.Height);
+}
 
-	// Attention en appellant ce constructeur, aucun width ou height de destination n'est set...
+Sprite::Sprite(Texture::ID id, int x, int y)
+	: texInfos(Textures->Get(id))
+	, mCenter(&D3DXVECTOR3(0.0f, 0.0f, 0.0f))
+	, isVisible(true)
+	, alpha(255)
+	, srcRect(0)
+	, dstRect(0)
+	//, flipType(SDL_FLIP_NONE)
+{
+	D3DXMatrixIdentity(&mRotation);
+
+	srcRect = new RECT();
+	srcRect->left = 0;
+	srcRect->top = 0;
+
+	dstRect = new RECT();
+	SetDstFrame(x, y, texInfos->infos.Width, texInfos->infos.Height);
 }
 
 

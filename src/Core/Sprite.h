@@ -17,28 +17,29 @@ class Sprite :
 {
 public:
 	Sprite(Texture::ID id);
+	Sprite(Texture::ID id, int x, int y);
 	Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR2* const srcSize);
 	~Sprite();
 
 	// Getters
 	bool IsVisible()				{ return isVisible; }
 	RECT GetRect()					{ return{ dstRect->left, dstRect->top, dstRect->right, dstRect->bottom }; }
-	D3DXVECTOR3 GetPosition()		{ return D3DXVECTOR3(dstRect->left, dstRect->top, 0.f); }
+	D3DXVECTOR3 GetPosition()		{ return D3DXVECTOR3(mTranslation._41, mTranslation._42, 0.f); }
 	D3DXVECTOR2 GetSize()			{ return D3DXVECTOR2(dstRect->right, dstRect->bottom); }
 	TextureInfos* GetTextureInfos() { return texInfos; }
 
 	// Setters
 	void SetAlpha(int alpha)						{ this->alpha = alpha; }
-	void SetPosition(int x, int y)					
+	void SetPosition(float x, float y)					
 	{ 
 		dstRect->left = x; dstRect->top = y; 
-		D3DXMatrixTranslation(&mTranslation, (float)dstRect->left, (float)dstRect->top, 10.0f);
+		D3DXMatrixTranslation(&mTranslation, x, y, 10.0f);
 	}
-	void SetDstFrame(int x, int y, int w, int h)	
+	void SetDstFrame(float x, float y, float w, float h)	
 	{ 
 		dstRect->left = x, dstRect->top = y; 
 		dstRect->right = w; dstRect->bottom = h;
-		D3DXMatrixTranslation(&mTranslation, (float)dstRect->left, (float)dstRect->top, 10.0f);
+		D3DXMatrixTranslation(&mTranslation, x, y, 10.0f);
 	}
 	void SetSrcFrame(int x, int y, int w, int h)	{ srcRect->left = x, srcRect->top = y; srcRect->right = w; srcRect->bottom = h; }
 	//void SetTexture(Texture::ID id)				{ texture = gEngine->GetTextures()->Get(id); }
