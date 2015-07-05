@@ -48,6 +48,8 @@ Sprite::Sprite(Texture::ID id)
 	srcRect = new RECT();
 	srcRect->left = 0;
 	srcRect->top = 0;
+	srcRect->right = texInfos->infos.Width;
+	srcRect->bottom = texInfos->infos.Height;
 
 	dstRect = new RECT();
 	SetDstFrame(srcRect->left, srcRect->top, texInfos->infos.Width, texInfos->infos.Height * 0.5f);
@@ -67,6 +69,8 @@ Sprite::Sprite(Texture::ID id, int x, int y)
 	srcRect = new RECT();
 	srcRect->left = 0;
 	srcRect->top = 0;
+	srcRect->right = texInfos->infos.Width;
+	srcRect->bottom = texInfos->infos.Height;
 
 	dstRect = new RECT();
 	SetDstFrame(x, y, texInfos->infos.Width, texInfos->infos.Height);
@@ -95,9 +99,9 @@ Sprite::Sprite(Texture::ID id, const D3DXVECTOR2* const srcPos, const D3DXVECTOR
 
 	srcRect = new RECT();
 	srcRect->left = srcPos->x;
-	srcRect->top = srcSize->y;
+	srcRect->top = srcSize->y + srcPos->y;
 	srcRect->right = srcSize->x;
-	srcRect->bottom = srcSize->y;
+	srcRect->bottom = srcPos->y;
 
 	dstRect = new RECT();
 	SetDstFrame(0, 0, srcSize->x, srcSize->y);
@@ -142,7 +146,7 @@ void Sprite::ApplyTexture(ID3DXSprite* const renderer)
 {
 	HR(renderer->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_DONOTMODIFY_RENDERSTATE));
 	HR(renderer->SetTransform(&(mRotation * mTranslation)));
-	HR(renderer->Draw(texInfos->texture, 0, &mPivot, 0, D3DCOLOR_XRGB(255, 255, 255)));
+	HR(renderer->Draw(texInfos->texture, srcRect, &mPivot, 0, D3DCOLOR_XRGB(255, 255, 255)));
 	HR(renderer->Flush());
 	HR(renderer->End());
 }
@@ -166,8 +170,8 @@ void Sprite::Scale(float k)
 
 /* Sprite Flipping
  */
-void Sprite::Flip(unsigned int flip)
-{
-	//this->flipType = (SDL_RendererFlip)flip;
-}
+//void Sprite::Flip(unsigned int flip)
+//{
+//	//this->flipType = (SDL_RendererFlip)flip;
+//}
 

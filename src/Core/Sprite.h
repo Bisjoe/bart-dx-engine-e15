@@ -28,10 +28,10 @@ public:
 															   dstRect->right = w; dstRect->bottom = h;
 															   D3DXMatrixTranslation(&mTranslation, x, y, 10.0f); }
 	void SetSrcFrame(int x, int y, int w, int h)			 { srcRect->left = x, srcRect->top = y; srcRect->right = w; srcRect->bottom = h; }
-	//void SetTexture(Texture::ID id)						 { texture = gEngine->GetTextures()->Get(id); }
+	void SetTexInfos(Texture::ID id)						 { texInfos = Textures->Get(id); }
 	void SetVisible(bool visible)							 { isVisible = visible; }
 	void ResizeTo(int w, int h)								 { dstRect->right = w; dstRect->bottom = h; }
-	void Flip(unsigned int flip);
+	// void Flip(unsigned int flip);
 	void SetRotationRad(float yaw, float pitch, float roll)  { D3DXMatrixRotationYawPitchRoll(&mRotation, yaw, pitch, roll); }
 	void SetRotationDeg(float yaw, float pitch, float roll)  { SetRotationRad(D3DXToRadian(yaw), D3DXToRadian(pitch), D3DXToRadian(roll)); }
 	void SetPivot(D3DXVECTOR3 pivot)						 { mPivot = pivot; }
@@ -42,7 +42,7 @@ public:
 	virtual void Update();
 	virtual void Stop();
 	void Draw();
-	void Kill()											 { delete this; }
+	void Kill()												 { delete this; }
 
 protected:
 	Sprite();
@@ -52,7 +52,6 @@ protected:
 	TextureInfos* texInfos;
 	RECT* dstRect;
 	RECT* srcRect;
-	//SDL_RendererFlip flipType;
 
 	int alpha;
 	float scaling;

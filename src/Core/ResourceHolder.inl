@@ -28,15 +28,14 @@ void ResourceHolder<Resource, Identifier>::LoadSound(Identifier id, const std::s
 	// Turns out the irrKlang function to load sound only check if a sound was already loaded by comparing the paths 
 	// (but never check if a file actually exist for this path)
 	// This little check serve that very purpose
-	std::ifstream ifile(filename.c_str());
-	if (!ifile) {
-		std::cout << "ERROR [ResourceHolder:Sound]: sound " << filename << " could not be loaded (File doesn't exist)" << std::endl;
+	std::ifstream file(filename.c_str());
+	if (!file) {
+		std::cout << "ERROR [ResourceHolder:Sound]: sound " << filename << " could not be loaded (File does not exist)" << std::endl;
 		return;
 	}
 	irrklang::ISoundSource* sound = gEngine->GetSoundEngine()->addSoundSourceFromFile(filename.c_str());
 	if (sound) {
 		InsertResource(id, std::move(sound));
-		return;
 	}
 }
 
@@ -87,7 +86,6 @@ bool ResourceHolder<Resource, Identifier>::RemoveResource(Identifier id)
 		mResources.erase(found);
 		return true;
 	}
-	else {
-		return false;
-	}
+
+	return false;
 }
