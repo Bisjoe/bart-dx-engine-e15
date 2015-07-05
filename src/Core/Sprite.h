@@ -22,6 +22,7 @@ public:
 
 	// Setters
 	void SetAlpha(int alpha)								 { this->alpha = alpha; }
+	void SetPosition(D3DXVECTOR2* pos)						 { SetPosition(pos->x, pos->y); }
 	void SetPosition(float x, float y)						 { dstRect->left = x; dstRect->top = y; 
 															   D3DXMatrixTranslation(&mTranslation, x, y, 10.0f); }
 	void SetDstFrame(float x, float y, float w, float h)	 { dstRect->left = x, dstRect->top = y; 
