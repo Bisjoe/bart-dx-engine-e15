@@ -1,6 +1,7 @@
 #include "Utils.h"
 #include "ResourceHolder.h"
 #include <irrKlang.h>
+#include <fstream>
 
 template <typename Resource, typename Identifier>
 ResourceHolder<Resource, Identifier>::ResourceHolder()
@@ -24,9 +25,19 @@ void ResourceHolder<Resource, Identifier>::LoadTexture(Identifier id, const std:
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::LoadSound(Identifier id, const std::string& filename)
 {
+	// Turns out the irrKlang function to load sound only check if a sound was already loaded by comparing the paths 
+	// (but never check if a file actually exist for this path)
+	// This little check serve that very purpose
+	std::ifstream ifile(filename.c_str());
+	if (!ifile) {
+		std::cout << "ERROR [ResourceHolder:Sound]: sound " << filename << " could not be loaded (File doesn't exist)" << std::endl;
+		return;
+	}
 	irrklang::ISoundSource* sound = gEngine->GetSoundEngine()->addSoundSourceFromFile(filename.c_str());
-	if (sound)
+	if (sound) {
 		InsertResource(id, std::move(sound));
+		return;
+	}
 }
 
 //template <typename Resource, typename Identifier>
@@ -56,6 +67,7 @@ Resource* ResourceHolder<Resource, Identifier>::Get(Identifier id) const
 	}
 	else
 	{
+		std::cout << "ERROR [ResourceHolder:Get]: Resource not found." << std::endl;
 		return NULL;
 	}
 }
@@ -65,4 +77,17 @@ void ResourceHolder<Resource, Identifier>::InsertResource(Identifier id, Resourc
 {
 	auto inserted = mResources.insert(std::make_pair(id, std::move(resource)));
 	assert(inserted.second);
+}
+
+template <typename Resource, typename Identifier>
+bool ResourceHolder<Resource, Identifier>::RemoveResource(Identifier id)
+{
+	auto found = mResources.find(id);
+	if (found != mResources.end()) {
+		mResources.erase(found);
+		return true;
+	}
+	else {
+		return false;
+	}
 }

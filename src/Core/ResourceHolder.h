@@ -34,6 +34,7 @@ public:
 	void LoadTexture(Identifier id, const std::string& filename);
 	void LoadSound(Identifier id, const std::string& filename);
 	void LoadFont(Identifier id, const std::string& filename, int fontSize);
+	bool ResourceHolder<Resource, Identifier>::RemoveResource(Identifier id);
 
 	//Get resource from ID
 	Resource* Get(Identifier id) const;
