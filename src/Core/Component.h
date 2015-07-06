@@ -26,6 +26,9 @@ public:
 	void SetID(Components::ID id) { this->id = id; }
 	const Components::ID GetID() { return id; }
 
+protected:
+	bool isActive;
+
 private:
 	// Components vectors
 	static std::vector<Component*> components;
@@ -34,6 +37,5 @@ private:
 	static std::vector<Component*> removed;
 
 	Components::ID id;
-	bool isActive;
 };
 
