@@ -23,6 +23,8 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	, soundEngine(nullptr)
 {
 	gApp = this;
+
+	InitAllVertexDeclarations();
 }
 
 Engine::~Engine()
@@ -49,6 +51,8 @@ Engine::~Engine()
 	// Clearing the Sound Engine
 	soundEngine->drop();
 	soundEngine = nullptr;
+
+	DestroyAllVertexDeclarations();
 }
 
 void Engine::Init()

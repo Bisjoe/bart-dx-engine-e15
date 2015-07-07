@@ -44,4 +44,7 @@
 //#include "Timer.h"
 #include "ResourceHolder.h"
 
+// Renderer
+#include "Vertex.h"
+
 #endif

@@ -79,8 +79,10 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CRectangle.cpp" />
+    <ClCompile Include="CustomModel.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCircle.h" />
@@ -88,10 +90,12 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="CustomModel.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureInfos.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ResourceHolder.inl" />
