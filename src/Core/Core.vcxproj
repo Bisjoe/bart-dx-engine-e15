@@ -82,6 +82,7 @@
     <ClCompile Include="CustomModel.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +96,7 @@
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureInfos.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>

@@ -66,6 +66,7 @@ private:
 
 	void CheckNew();
 	void CheckDeleted();
+	void BuildViewProjMtx();
 
 	D3DXVECTOR2										screenSize;
 	irrklang::ISoundEngine*							soundEngine;
@@ -77,6 +78,12 @@ private:
 	//ResourceHolder<TTF_Font, int>*				fonts;
 	ResourceHolder<irrklang::ISoundSource, int>*	sounds;
 	//point<float>									scaling;
+
+	D3DXMATRIX view;
+	D3DXMATRIX proj;
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 up;
+	D3DXVECTOR3 target;
 };
 
 extern Engine* gEngine;

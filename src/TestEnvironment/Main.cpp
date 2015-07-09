@@ -2,6 +2,7 @@
 #include "App.h"
 #include "Engine.h"
 #include "Peggle.h"
+#include "ShipRace.h"
 
 int WINAPI _tWinMain(HINSTANCE hInstance, 
 	HINSTANCE prevHInstance, 
@@ -12,7 +13,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
 
 	engine->Init();
 
-	Peggle* game = new Peggle();
+	//Peggle* game = new Peggle();
+	ShipRace* game = new ShipRace();
 
 	int assert = gEngine->Run();
 

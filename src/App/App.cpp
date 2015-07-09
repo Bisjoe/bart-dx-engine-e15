@@ -301,7 +301,7 @@ void App::PreDraw()
 {
 	HR(gD3DDevice->Clear(0, 0,
 		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-		D3DCOLOR_XRGB(255, 255, 255), 1.0f, 0));
+		D3DCOLOR_XRGB(128, 128, 128), 1.0f, 0));
 
 	HR(gD3DDevice->BeginScene());
 

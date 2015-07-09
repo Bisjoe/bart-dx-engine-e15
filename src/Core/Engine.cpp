@@ -21,6 +21,9 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	: screenSize(screenWidth, screenHeight)
 	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
+	, pos(0.f, 2.f, -10.f)
+	, up(0.f, 1.f, 0.f)
+	, target(0.f, 0.f, 0.f)
 {
 	gApp = this;
 
@@ -131,27 +134,7 @@ void Engine::Update()
 
 void Engine::Draw()
 {
-
-	// TODO Camera class
-	// Camera updating
-	D3DXMATRIX view;
-	D3DXMATRIX orth;
-	
-	D3DXVECTOR3 pos(0.f, 0.f, -100.f);
-	D3DXVECTOR3 up(0.f, 1.f, 0.f);
-	D3DXVECTOR3 target(0.f, 0.f, 0.f);
-	
-	D3DXMatrixLookAtLH(&view, &pos, &target, &up);
-	D3DXMatrixOrthoLH(&orth, (float)mD3Dpp.BackBufferWidth, 
-		(float)mD3Dpp.BackBufferHeight,	1.f, 5000.f);
-	
-	// Fixed pipeline
-	HR(gD3DDevice->SetRenderState(D3DRS_LIGHTING, false));
-	HR(gD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
-	
-	HR(gD3DDevice->SetTransform(D3DTS_VIEW, &view));
-	HR(gD3DDevice->SetTransform(D3DTS_PROJECTION, &orth));
-	// ---------------------
+	BuildViewProjMtx();
 
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
@@ -272,4 +255,27 @@ void Engine::CheckDeleted()
 		}
 	}
 	Component::toDelete.clear();
+}
+
+void Engine::BuildViewProjMtx()
+{
+	// TODO Camera class
+
+	D3DXMatrixLookAtLH(&view, &pos, &target, &up);
+	D3DXMatrixPerspectiveFovLH(&proj, -D3DX_PI * 0.25f,
+		(float)mD3Dpp.BackBufferWidth / (float)mD3Dpp.BackBufferHeight,
+		1.0f, 5000.0f);
+
+	//D3DXMatrixOrthoLH(&orth, (float)mD3Dpp.BackBufferWidth, 
+	//	(float)mD3Dpp.BackBufferHeight,	1.f, 5000.f);
+
+	// Fixed pipeline
+	HR(gD3DDevice->SetRenderState(D3DRS_LIGHTING, false));
+	HR(gD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
+
+	HR(gD3DDevice->SetTransform(D3DTS_VIEW, &view));
+	HR(gD3DDevice->SetTransform(D3DTS_PROJECTION, &proj));
+	// ---------------------
+
+	
 }

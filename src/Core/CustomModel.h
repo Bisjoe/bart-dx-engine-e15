@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Utils.h"
+#include "Vertex.h"
 #include "Component.h"
 
 class CustomModel: public Component
@@ -14,10 +15,9 @@ public:
 	void Draw();
 
 protected:
-	virtual void BuildVertexBuffer();
-	virtual void BuildIndexBuffer();
-
-private:
+	virtual void BuildVertexBuffer() { }
+	virtual void BuildIndexBuffer() { }
+	
 	IDirect3DVertexBuffer9* mVB;
 	IDirect3DIndexBuffer9* mIB;
 

@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <string>
+#include <vector>
 #include <tchar.h>
 #include <d3dx9.h>
 #include <DxErr.h>
