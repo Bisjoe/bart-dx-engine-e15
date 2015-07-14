@@ -7,7 +7,6 @@ Triangle::Triangle()
 
 Triangle::~Triangle()
 {
-	ReleaseCOM(mVB);
 }
 
 void Triangle::BuildVertexBuffer()

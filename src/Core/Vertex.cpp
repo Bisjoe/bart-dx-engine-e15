@@ -14,7 +14,7 @@ void InitAllVertexDeclarations()
 	HR(gD3DDevice->CreateVertexDeclaration(vertexPosElements, &VertexPos::decl));
 
 	// VertexPosCol
-	int totalSize = 0;
+	int totalSize = -static_cast<int>(sizeof(D3DXVECTOR3));
 	std::vector<D3DVERTEXELEMENT9> vpe;
 	vpe.push_back( { 0, totalSize += sizeof(D3DXVECTOR3), D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 } );
 	vpe.push_back( { 0, totalSize += sizeof(D3DCOLOR), D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0 } );
