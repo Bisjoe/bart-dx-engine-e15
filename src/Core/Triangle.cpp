@@ -12,7 +12,7 @@ Triangle::~Triangle()
 void Triangle::BuildVertexBuffer()
 {
 	// Vertex Buffer créé sur la carte video.
-	HR(gD3DDevice->CreateVertexBuffer(3 * sizeof(VertexPos),
+	HR(gD3DDevice->CreateVertexBuffer(NUM_FACES * 3 * sizeof(VertexPos),
 		D3DUSAGE_WRITEONLY, 0,
 		D3DPOOL_MANAGED, &mVB, 0));
 

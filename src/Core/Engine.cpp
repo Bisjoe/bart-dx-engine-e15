@@ -21,9 +21,9 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	: screenSize(screenWidth, screenHeight)
 	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
-	, pos(0.f, 2.f, -10.f)
-	, up(0.f, 1.f, 0.f)
-	, target(0.f, 0.f, 0.f)
+	, mPos(0.f, 2.f, -10.f)
+	, mUp(0.f, 1.f, 0.f)
+	, mTarget(0.f, 0.f, 0.f)
 {
 	gApp = this;
 
@@ -261,8 +261,8 @@ void Engine::BuildViewProjMtx()
 {
 	// TODO Camera class
 
-	D3DXMatrixLookAtLH(&view, &pos, &target, &up);
-	D3DXMatrixPerspectiveFovLH(&proj, -D3DX_PI * 0.25f,
+	D3DXMatrixLookAtLH(&mView, &mPos, &mTarget, &mUp);
+	D3DXMatrixPerspectiveFovLH(&mProj, -D3DX_PI * 0.25f,
 		(float)mD3Dpp.BackBufferWidth / (float)mD3Dpp.BackBufferHeight,
 		1.0f, 5000.0f);
 
@@ -273,8 +273,8 @@ void Engine::BuildViewProjMtx()
 	HR(gD3DDevice->SetRenderState(D3DRS_LIGHTING, false));
 	HR(gD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
 
-	HR(gD3DDevice->SetTransform(D3DTS_VIEW, &view));
-	HR(gD3DDevice->SetTransform(D3DTS_PROJECTION, &proj));
+	HR(gD3DDevice->SetTransform(D3DTS_VIEW, &mView));
+	HR(gD3DDevice->SetTransform(D3DTS_PROJECTION, &mProj));
 	// ---------------------
 
 	

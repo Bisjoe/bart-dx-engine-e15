@@ -53,4 +53,9 @@
       <Filter>Fichiers de ressources</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Transform.fx">
+      <Filter>Fichiers de ressources</Filter>
+    </FxCompile>
+  </ItemGroup>
 </Project>

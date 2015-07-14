@@ -48,6 +48,8 @@ public:
 	ID3DXSprite*									GetSpriteBatch() { return spriteBatch; }
 	irrklang::ISoundEngine*							GetSoundEngine() { return soundEngine; }
 	D3DXVECTOR2										GetScreenSize()  { return screenSize;  }
+	D3DXMATRIX										GetView()		 { return mView; }
+	D3DXMATRIX										GetProj()		 { return mProj; }
 	//Audio*										GetAudio()		 { return audio;	}
 	//Input*										GetInput()		 { return input;	}
 	//Timer*										GetTimer()		 { return timer;	}
@@ -79,11 +81,11 @@ private:
 	ResourceHolder<irrklang::ISoundSource, int>*	sounds;
 	//point<float>									scaling;
 
-	D3DXMATRIX view;
-	D3DXMATRIX proj;
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 up;
-	D3DXVECTOR3 target;
+	D3DXMATRIX mView;
+	D3DXMATRIX mProj;
+	D3DXVECTOR3 mPos;
+	D3DXVECTOR3 mUp;
+	D3DXVECTOR3 mTarget;
 };
 
 extern Engine* gEngine;

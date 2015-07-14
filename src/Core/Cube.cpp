@@ -12,7 +12,7 @@ Cube::~Cube()
 
 void Cube::BuildVertexBuffer()
 {
-	HR(gD3DDevice->CreateVertexBuffer(8 * sizeof(VertexPos),
+	HR(gD3DDevice->CreateVertexBuffer(NUM_VERTICES * sizeof(VertexPos),
 		D3DUSAGE_WRITEONLY, 0,
 		D3DPOOL_MANAGED, &mVB, 0));
 
@@ -33,7 +33,7 @@ void Cube::BuildVertexBuffer()
 
 void Cube::BuildIndexBuffer()
 {
-	HR(gD3DDevice->CreateIndexBuffer(36 * sizeof(WORD), D3DUSAGE_WRITEONLY,
+	HR(gD3DDevice->CreateIndexBuffer(NUM_FACES * 3 * sizeof(WORD), D3DUSAGE_WRITEONLY,
 		D3DFMT_INDEX16, D3DPOOL_MANAGED, &mIB, 0));
 
 	WORD* k = 0;
