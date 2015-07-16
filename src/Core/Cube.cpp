@@ -12,21 +12,21 @@ Cube::~Cube()
 
 void Cube::BuildVertexBuffer()
 {
-	HR(gD3DDevice->CreateVertexBuffer(NUM_VERTICES * sizeof(VertexPos),
+	HR(gD3DDevice->CreateVertexBuffer(NUM_VERTICES * sizeof(VertexPosCol),
 		D3DUSAGE_WRITEONLY, 0,
 		D3DPOOL_MANAGED, &mVB, 0));
 
-	VertexPos* v = 0;
+	VertexPosCol* v = 0;
 	HR(mVB->Lock(0, 0, (void**)&v, 0));
 
-	v[0] = VertexPos(-1.0f, -1.0f, -1.0f);
-	v[1] = VertexPos(-1.0f, 1.0f, -1.0f);
-	v[2] = VertexPos(1.0f, 1.0f, -1.0f);
-	v[3] = VertexPos(1.0f, -1.0f, -1.0f);
-	v[4] = VertexPos(-1.0f, -1.0f, 1.0f);
-	v[5] = VertexPos(-1.0f, 1.0f, 1.0f);
-	v[6] = VertexPos(1.0f, 1.0f, 1.0f);
-	v[7] = VertexPos(1.0f, -1.0f, 1.0f);
+	v[0] = VertexPosCol(-1.0f, -1.0f, -1.0f, D3DCOLOR_XRGB(255, 255, 255));
+	v[1] = VertexPosCol(-1.0f, 1.0f, -1.0f, D3DCOLOR_XRGB(255, 0, 255));
+	v[2] = VertexPosCol(1.0f, 1.0f, -1.0f, D3DCOLOR_XRGB(255, 255, 0));
+	v[3] = VertexPosCol(1.0f, -1.0f, -1.0f, D3DCOLOR_XRGB(0, 255, 255));
+	v[4] = VertexPosCol(-1.0f, -1.0f, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+	v[5] = VertexPosCol(-1.0f, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 0, 0));
+	v[6] = VertexPosCol(1.0f, 1.0f, 1.0f, D3DCOLOR_XRGB(0, 0, 0));
+	v[7] = VertexPosCol(1.0f, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 
 	HR(mVB->Unlock());
 }

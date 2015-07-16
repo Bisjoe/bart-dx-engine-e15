@@ -4,15 +4,15 @@
 ShipRace::ShipRace()
 {
 	//triangle = new Triangle();
-	cube = new Cube();
-	//triGrid = new TriGrid(100, 100, 1.f);
+	//cube = new Cube();
+	triGrid = new TriGrid(100, 100, 1.f);
 }
 
 ShipRace::~ShipRace()
 {
 	//delete triangle;
-	delete cube;
-	//delete triGrid;
+	//delete cube;
+	delete triGrid;
 }
 
 void ShipRace::Start()

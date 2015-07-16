@@ -42,8 +42,8 @@ void CustomModel::Update()
 
 void CustomModel::Draw()
 {
-	HR(gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPos)));
-	HR(gD3DDevice->SetVertexDeclaration(VertexPos::decl));
+	HR(gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPosCol)));
+	HR(gD3DDevice->SetVertexDeclaration(VertexPosCol::decl));
 	if (mIB != nullptr)
 	{
 		HR(gD3DDevice->SetIndices(mIB));

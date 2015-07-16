@@ -25,11 +25,11 @@ TriGrid::~TriGrid()
 
 void TriGrid::BuildVertexBuffer()
 {
-	HR(gD3DDevice->CreateVertexBuffer(GetNumVertices() * sizeof(VertexPos),
+	HR(gD3DDevice->CreateVertexBuffer(GetNumVertices() * sizeof(VertexPosCol),
 		D3DUSAGE_WRITEONLY, 0,
 		D3DPOOL_MANAGED, &mVB, 0));
 
-	VertexPos* v = 0;
+	VertexPosCol* v = 0;
 	HR(mVB->Lock(0, 0, (void**)&v, 0));
 
 	float halfWidth = (width) * tileW * 0.5f;
@@ -44,6 +44,7 @@ void TriGrid::BuildVertexBuffer()
 			float y = 0;
 
 			v[i * (height+1) + j].pos = D3DXVECTOR3(x, y, z);
+			v[i * (height + 1) + j].col = D3DCOLOR_XRGB(255, 255, 255);
 		}
 	}
 	
