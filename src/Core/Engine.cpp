@@ -262,7 +262,7 @@ void Engine::BuildViewProjMtx()
 	// TODO Camera class
 
 	D3DXMatrixLookAtLH(&mView, &mPos, &mTarget, &mUp);
-	D3DXMatrixPerspectiveFovLH(&mProj, -D3DX_PI * 0.25f,
+	D3DXMatrixPerspectiveFovLH(&mProj, D3DX_PI * 0.25f,
 		(float)mD3Dpp.BackBufferWidth / (float)mD3Dpp.BackBufferHeight,
 		1.0f, 5000.0f);
 
