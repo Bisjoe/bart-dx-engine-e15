@@ -15,6 +15,12 @@ public:
 	virtual void Update();
 	void Draw();
 
+	void SetRotation(float rot) { mRotation = rot; }
+	float GetRotation() { return mRotation; }
+
+	void SetPosition(float x, float y, float z) { mPosition.x = x; mPosition.y = y; mPosition.z = z; }
+	D3DXVECTOR3 GetPosition() { return mPosition; }
+
 protected:
 	virtual int GetNumFaces() = 0;
 	virtual int GetNumVertices() = 0;
@@ -32,5 +38,9 @@ protected:
 	D3DXHANDLE mhWVP;
 
 	float currentRotation;
+
+private:
+	float mRotation;
+	D3DXVECTOR3 mPosition;
 };
 
