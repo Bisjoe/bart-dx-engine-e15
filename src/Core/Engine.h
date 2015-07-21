@@ -50,6 +50,7 @@ public:
 	D3DXVECTOR2										GetScreenSize()  { return screenSize;  }
 	D3DXMATRIX										GetView()		 { return mView; }
 	D3DXMATRIX										GetProj()		 { return mProj; }
+	D3DXVECTOR3										GetCamPos()		 { return mPos; }
 	//Audio*										GetAudio()		 { return audio;	}
 	//Input*										GetInput()		 { return input;	}
 	//Timer*										GetTimer()		 { return timer;	}

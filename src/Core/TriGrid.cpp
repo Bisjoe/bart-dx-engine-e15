@@ -15,7 +15,10 @@ TriGrid::TriGrid(int w, int h, int dx)
 	, tileW(dx)
 {
 	mhTime = mFx->GetParameterByName(0, "gTime");
-	mhTech = mFx->GetTechniqueByName("TransformTechSine");
+	mhEyePos = mFx->GetParameterByName(0, "gEyePos");
+	mhFogColor = mFx->GetParameterByName(0, "gFogColor");
+
+	mhTech = mFx->GetTechniqueByName("TransformTech");
 		
 	mFx->SetTechnique(mhTech);
 
@@ -31,6 +34,8 @@ TriGrid::~TriGrid()
 void TriGrid::Update()
 {
 	mFx->SetFloat(mhTime, gTimer->GetGameTime());
+	mFx->SetValue(mhEyePos, gEngine->GetCamPos(), sizeof(D3DXVECTOR3));
+	mFx->SetVector(mhFogColor, &D3DXVECTOR4(0.5f, 0.5f, 0.5f, 1.0f));
 }
 
 void TriGrid::BuildVertexBuffer()
@@ -51,7 +56,7 @@ void TriGrid::BuildVertexBuffer()
 		for (DWORD j = 0; j < height+1; j++)
 		{
 			float x = -halfHeight + j * tileW;
-			float y = 0;
+			float y = GetHeight(x, z);
 
 			v[i * (height+1) + j].pos = D3DXVECTOR3(x, y, z);
 			v[i * (height + 1) + j].col = D3DCOLOR_XRGB(255, 255, 255);

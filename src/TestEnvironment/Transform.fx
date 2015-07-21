@@ -14,7 +14,11 @@
 
 uniform extern float4x4 gWVP;
 uniform extern float gTime;
+uniform extern float3 gEyePos;
+uniform extern float4 gFogColor;
 
+float minDist = 0.0f;
+float maxDist = 100.0f;
 
 // Amplitude
 static float a[2] = { 0.8f, 0.2f };
@@ -34,6 +38,7 @@ struct OutputVS
 				// SEMANTIC
 	float4 posH: POSITION0;
 	float4 color: COLOR0;
+	float fogLerp : TEXCOORD3;
 };
 
 float SumOfRadialSineWave(float x, float z)
@@ -50,9 +55,20 @@ float SumOfRadialSineWave(float x, float z)
 	return sum;
 }
 
-//float4 GetColorFromHeight(float y)
+float4 GetColorFromHeight(float y)
+{
+	if (abs(y) <= -10.0f)
+		return float4(1.0f, 0.96f, 0.62f, 1.0f); // Beach Sand
+	else if (abs(y) <= 5.0f)
+		return float4(0.48f, 0.77f, 0.46f, 1.0f); // Light Yellow green
+	else if (abs(y) <= 12.0f)
+		return float4(0.0f, 1.0f, 0.0f, 1.0f); // GREEN
+	else if (abs(y) <= 20.0f)
+		return float4(1.0f, 0.0f, 0.0f, 1.0f); // RED
+	else
+		return float4(1.0f, 1.0f, 0.0f, 1.0f);
+}
 
-// Fonction VertexShader
 // Fonction VertexShader
 OutputVS TransformSineVS(float3 posL: POSITION0, float4 color : COLOR0)
 {
@@ -61,18 +77,8 @@ OutputVS TransformSineVS(float3 posL: POSITION0, float4 color : COLOR0)
 	posL.y = SumOfRadialSineWave(posL.x, posL.z);
 
 	outVS.posH = mul(float4(posL, 1.0f), gWVP);
-	outVS.color = color;
-	return outVS;
-}
+	outVS.color = GetColorFromHeight(posL.y);
 
-OutputVS TransformSineVS_Scale(float3 posL: POSITION0, float4 color : COLOR0)
-{
-	OutputVS outVS = (OutputVS)0;
-
-	posL.y = SumOfRadialSineWave(posL.x, posL.z);
-
-	outVS.posH = mul(float4(posL * 1.01f, 1.0f), gWVP);
-	outVS.color = color;
 	return outVS;
 }
 
@@ -80,7 +86,11 @@ OutputVS TransformVS(float3 posL: POSITION0, float4 color: COLOR0)
 {
 	OutputVS outVS = (OutputVS)0;
 	outVS.posH = mul(float4(posL, 1.0f), gWVP);
-	outVS.color = color;
+	outVS.color = GetColorFromHeight(posL.y);
+
+	float dist = distance(outVS.posH, gEyePos);
+	outVS.fogLerp = saturate((dist - minDist) / (maxDist - minDist));
+
 	return outVS;
 }
 
@@ -94,7 +104,8 @@ OutputVS TransformVS_Scale(float3 posL: POSITION0, float4 color : COLOR0)
 
 float4 TransformPS(OutputVS inVS): COLOR0
 {
-	return inVS.color;
+	float4 finalColor = lerp(inVS.color, gFogColor, inVS.fogLerp);
+	return finalColor;
 }
 
 float4 TransformPS_Black(OutputVS inVS) : COLOR0
@@ -115,7 +126,7 @@ technique TransformTech
 
 	pass P1
 	{
-		vertexShader = compile vs_2_0 TransformVS_Scale();
+		vertexShader = compile vs_2_0 TransformVS();
 		pixelShader = compile ps_2_0 TransformPS_Black();
 		FillMode = WireFrame;
 	}
@@ -132,7 +143,7 @@ technique TransformTechSine
 
 	pass P1
 	{
-		vertexShader = compile vs_2_0 TransformSineVS_Scale();
+		vertexShader = compile vs_2_0 TransformSineVS();
 		pixelShader = compile ps_2_0 TransformPS_Black();
 		FillMode = WireFrame;
 	}

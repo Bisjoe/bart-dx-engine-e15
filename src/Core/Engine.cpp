@@ -21,9 +21,9 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	: screenSize(screenWidth, screenHeight)
 	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
-	, mPos(0.f, 1.f, -10.f)
+	, mPos(0.f, 1.f, -20.f)
 	, mUp(0.f, 1.f, 0.f)
-	, mTarget(0.f, 0.f, 0.f)
+	, mTarget(0.f, 1.f, 0.f)
 {
 	gApp = this;
 

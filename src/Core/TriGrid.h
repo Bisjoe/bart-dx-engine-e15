@@ -21,9 +21,17 @@ protected:
 private:
 	TriGrid();
 
+	float GetHeight(float x, float z)
+	{
+		return (((rand() % 160) + 1) / 1000.0f * (z*sinf(((rand() % 20) + 1) / 1000.0f * x) + x * cosf(((rand() % 20) + 1) / 1000.0f * z)));
+	}
+
 	float tileW;
 	int width, height;
 
 	D3DXHANDLE mhTime;
+	D3DXHANDLE mhEyePos;
+	D3DXHANDLE mhFogColor;
+
 };
 
