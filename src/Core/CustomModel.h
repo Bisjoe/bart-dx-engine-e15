@@ -12,7 +12,7 @@ public:
 
 	void OnLostDevice();
 	void OnResetDevice();
-	void Update();
+	virtual void Update();
 	void Draw();
 
 protected:

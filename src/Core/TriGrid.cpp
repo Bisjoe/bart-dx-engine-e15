@@ -14,6 +14,11 @@ TriGrid::TriGrid(int w, int h, int dx)
 	, height(h)
 	, tileW(dx)
 {
+	mhTime = mFx->GetParameterByName(0, "gTime");
+	mhTech = mFx->GetTechniqueByName("TransformTechSine");
+		
+	mFx->SetTechnique(mhTech);
+
 	BuildVertexBuffer();
 	BuildIndexBuffer();
 }
@@ -21,6 +26,11 @@ TriGrid::TriGrid(int w, int h, int dx)
 TriGrid::~TriGrid()
 {
 
+}
+
+void TriGrid::Update()
+{
+	mFx->SetFloat(mhTime, gTimer->GetGameTime());
 }
 
 void TriGrid::BuildVertexBuffer()

@@ -9,6 +9,8 @@ public:
 	TriGrid(int w, int h, int dx);
 	~TriGrid();
 
+	void Update();
+
 protected:
 	int GetNumFaces() { return (width + 1) * (height + 1) * 2; }
 	int GetNumVertices(){ return (width + 1) * (height + 1); }
@@ -21,5 +23,7 @@ private:
 
 	float tileW;
 	int width, height;
+
+	D3DXHANDLE mhTime;
 };
 

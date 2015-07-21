@@ -21,7 +21,7 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	: screenSize(screenWidth, screenHeight)
 	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
-	, mPos(0.f, 2.f, -10.f)
+	, mPos(0.f, 1.f, -10.f)
 	, mUp(0.f, 1.f, 0.f)
 	, mTarget(0.f, 0.f, 0.f)
 {
@@ -262,7 +262,7 @@ void Engine::BuildViewProjMtx()
 	// TODO Camera class
 
 	D3DXMatrixLookAtLH(&mView, &mPos, &mTarget, &mUp);
-	D3DXMatrixPerspectiveFovLH(&mProj, -D3DX_PI * 0.25f,
+	D3DXMatrixPerspectiveFovLH(&mProj, D3DX_PI * 0.25f,
 		(float)mD3Dpp.BackBufferWidth / (float)mD3Dpp.BackBufferHeight,
 		1.0f, 5000.0f);
 

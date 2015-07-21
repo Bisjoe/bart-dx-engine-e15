@@ -54,10 +54,9 @@ void CustomModel::Draw()
 	D3DXMATRIX rot;
 	D3DXMatrixIdentity(&world);
 
-	D3DXMatrixRotationY(&rot, currentRotation);
-	D3DXMatrixTranslation(&trans, 5.f, 0.f, 0.f);
-
-	world = rot * trans;
+	//D3DXMatrixRotationY(&rot, currentRotation);
+	//D3DXMatrixTranslation(&trans, 5.f, 5.f, 0.f);
+	//world = rot * trans;
 
 	mFx->SetMatrix(mhWVP, &(world * gEngine->GetView() * gEngine->GetProj()) );
 
