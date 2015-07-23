@@ -4,7 +4,8 @@
 #include "Vertex.h"
 #include "Component.h"
 
-class CustomModel: public Component
+class CustomModel
+	: public Component
 {
 public:
 	CustomModel();
@@ -13,7 +14,7 @@ public:
 	void OnLostDevice();
 	void OnResetDevice();
 	virtual void Update();
-	void Draw();
+	virtual void Draw();
 
 	void SetRotation(float rot) { mRotation = rot; }
 	float GetRotation() { return mRotation; }
