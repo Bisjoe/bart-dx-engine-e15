@@ -58,10 +58,10 @@ void CustomModel::Draw()
 	//D3DXMatrixTranslation(&trans, 5.f, 5.f, 0.f);
 	//world = rot * trans;
 
-	mFx->SetMatrix(mhWVP, &(world * gEngine->GetView() * gEngine->GetProj()) );
+	HR(mFx->SetMatrix(mhWVP, &(world * gEngine->GetCamera()->GetView() * gEngine->GetCamera()->GetProj()) ));
 
 	UINT numPasses = 0;
-	mFx->Begin(&numPasses, 0);
+	HR(mFx->Begin(&numPasses, 0));
 
 	for (UINT i = 0; i < numPasses; i++)
 	{
@@ -76,7 +76,7 @@ void CustomModel::Draw()
 			HR(gD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0,
 				0, GetNumVertices(), 0, GetNumFaces()));
 		}
-		mFx->EndPass();
+		HR(mFx->EndPass());
 	}
-	mFx->End();
+	HR(mFx->End());
 }

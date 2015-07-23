@@ -3,6 +3,7 @@
 #include "Common.h"
 #include "Component.h"
 #include "TextureInfos.h"
+#include "Camera.h"
 //#include "DirectInput.h"
 //#include "GameTimer.h"
 
@@ -21,7 +22,8 @@
 //#define ThisKeyHeld cEngine->GetInput()->IsKeyHeld
 //#define ThisKeyReleased cEngine->GetInput()->IsKeyReleased
 
-class Engine: App
+class Engine
+	: App
 {
 
 public:
@@ -48,9 +50,7 @@ public:
 	ID3DXSprite*									GetSpriteBatch() { return spriteBatch; }
 	irrklang::ISoundEngine*							GetSoundEngine() { return soundEngine; }
 	D3DXVECTOR2										GetScreenSize()  { return screenSize;  }
-	D3DXMATRIX										GetView()		 { return mView; }
-	D3DXMATRIX										GetProj()		 { return mProj; }
-	D3DXVECTOR3										GetCamPos()		 { return mPos; }
+	Camera*											GetCamera()		 { return camera; }
 	//Audio*										GetAudio()		 { return audio;	}
 	//Input*										GetInput()		 { return input;	}
 	//Timer*										GetTimer()		 { return timer;	}
@@ -69,7 +69,7 @@ private:
 
 	void CheckNew();
 	void CheckDeleted();
-	void BuildViewProjMtx();
+
 
 	D3DXVECTOR2										screenSize;
 	irrklang::ISoundEngine*							soundEngine;
@@ -81,12 +81,9 @@ private:
 	//ResourceHolder<TTF_Font, int>*				fonts;
 	ResourceHolder<irrklang::ISoundSource, int>*	sounds;
 	//point<float>									scaling;
-
-	D3DXMATRIX mView;
-	D3DXMATRIX mProj;
-	D3DXVECTOR3 mPos;
-	D3DXVECTOR3 mUp;
-	D3DXVECTOR3 mTarget;
+	
+	Camera*											camera;
+	
 };
 
 extern Engine* gEngine;
