@@ -40,7 +40,6 @@ protected:
 
 	float currentRotation;
 
-private:
 	float mRotation;
 	D3DXVECTOR3 mPosition;
 };
