@@ -20,10 +20,14 @@ public:
 	Camera();
 	Camera(D3DPRESENT_PARAMETERS currentParam);
 	virtual ~Camera();
-	D3DXMATRIX										GetView()		 { return mView; }
-	D3DXMATRIX										GetProj()		 { return mProj; }
-	D3DXVECTOR3										GetCamPos()		 { return mPos; }
-
+	
+	D3DXMATRIX						GetView()							{ return mView; }
+	D3DXMATRIX						GetProj()							{ return mProj; }
+	D3DXVECTOR3						GetCamPos()							{ return mPos; }
+	
+	// Sets the position of the camera to allow translations of the camera.
+	virtual void							SetCamPos(D3DXVECTOR3 newPosition)	{ mPos.x = newPosition.x; mPos.y = newPosition.y; mPos.z = newPosition.z; }
+	
 	virtual void Update();
 	virtual void BuildViewProjMtx();
 
