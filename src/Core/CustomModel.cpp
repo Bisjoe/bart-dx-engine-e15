@@ -37,7 +37,7 @@ void CustomModel::OnResetDevice()
 
 void CustomModel::Update()
 {
-	currentRotation += 0.1f * gTimer->GetDeltaTime();
+	
 }
 
 void CustomModel::Draw()
@@ -54,11 +54,11 @@ void CustomModel::Draw()
 	D3DXMATRIX rot;
 	D3DXMatrixIdentity(&world);
 
-	//D3DXMatrixRotationY(&rot, currentRotation);
-	//D3DXMatrixTranslation(&trans, 5.f, 5.f, 0.f);
-	//world = rot * trans;
+	D3DXMatrixRotationY(&rot, currentRotation);
+	D3DXMatrixTranslation(&trans, mPosition.x, mPosition.y, mPosition.z);
+	world = rot * trans;
 
-	HR(mFx->SetMatrix(mhWVP, &(world * gEngine->GetCamera()->GetView() * gEngine->GetCamera()->GetProj()) ));
+	HR(mFx->SetMatrix(mhWVP, &(world * gEngine->GetCamera()->GetView() * gEngine->GetCamera()->GetProj())));
 
 	UINT numPasses = 0;
 	HR(mFx->Begin(&numPasses, 0));
