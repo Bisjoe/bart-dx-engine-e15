@@ -57,19 +57,19 @@ PrimitiveModel::~PrimitiveModel()
 
 void PrimitiveModel::OnLostDevice()
 {
-	mFx->OnLostDevice();
+	HR(mFx->OnLostDevice());
 }
 
 void PrimitiveModel::OnResetDevice()
 {
-	mFx->OnLostDevice();
+	HR(mFx->OnLostDevice());
 }
 
 void PrimitiveModel::BuildVertexBuffer()
 {
 	if (mesh != nullptr)
 	{
-		mesh->GetVertexBuffer(&mVB);
+		HR(mesh->GetVertexBuffer(&mVB));
 	}
 	else
 	{
@@ -81,7 +81,7 @@ void PrimitiveModel::BuildIndexBuffer()
 {
 	if (mesh != nullptr)
 	{
-		mesh->GetIndexBuffer(&mIB);
+		HR(mesh->GetIndexBuffer(&mIB));
 	}
 }
 
@@ -92,17 +92,17 @@ void PrimitiveModel::Draw()
 	if (mesh == nullptr)
 		return;
 
-	gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPosCol::decl));
-	gD3DDevice->SetIndices(mIB);
+	HR(gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPosCol::decl)));
+	HR(gD3DDevice->SetIndices(mIB));
 	
 	UINT numPasses = 0;
-	mFx->Begin(&numPasses, 0);
+	HR(mFx->Begin(&numPasses, 0));
 	
 	for (UINT i = 0; i < numPasses; i++)
 	{
-		mFx->BeginPass(i);
-		mesh->DrawSubset(0);
-		mFx->EndPass();
+		HR(mFx->BeginPass(i));
+		HR(mesh->DrawSubset(0));
+		HR(mFx->EndPass());
 	}
-	mFx->End();
+	HR(mFx->End());
 }
