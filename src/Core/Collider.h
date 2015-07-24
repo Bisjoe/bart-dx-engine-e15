@@ -9,8 +9,7 @@ enum Type
 {
 	RECTANGLE,
 	CIRCLE,
-	SPHERE,
-	BOX
+
 };
 
 class Collider
@@ -20,23 +19,23 @@ public:
 	//Constructors
 	Collider();
 	Collider(Component* gameObject, Type type, float x, float y);
-	Collider(Component* gameObject, Type type, float x, float y, float z);
+
 	~Collider();
 
 	//Getters
 	D3DXVECTOR2 GetPosition() { return position; }
-	D3DXVECTOR3 GetPosition3D() { return position3D; }
+
 	Component* GetGameObject() { return gameObject; }
 	const Type GetType() { return type; }
 	void SetEnabled(bool isEnabled) { this->isEnabled = isEnabled; }
 
 	//Setters
 	void SetPosition(const float x, const float y);
-	void SetPosition3D(const float x, const float y, const float z);
+
 
 	//Checks if a point is contained within the collider
 	virtual bool Contains(const float x, const float y) = 0;
-	virtual bool Contains3D(const float x, const float y, const float z) = 0;
+
 
 	//Checks collision with another collider
 	virtual bool CheckCollision(Collider* const collider) = 0;
@@ -46,7 +45,6 @@ public:
 
 protected:
 	D3DXVECTOR2 position;
-	D3DXVECTOR3 position3D;
 
 private:
 	//Holds a pointer to the object that own this collider. It's the most crucial part.
