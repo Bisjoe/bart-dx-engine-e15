@@ -6,7 +6,7 @@ class PrimitiveModel
 	: public Model
 {
 public:
-	enum PrimitiveModel_Type { CYLINDER, CUBE, SPHERE, TEAPOT };
+	enum PrimitiveModel_Type { CYLINDER, CUBE, SPHERE, TEAPOT, CONE };
 
 	PrimitiveModel();
 	PrimitiveModel(PrimitiveModel_Type type);
