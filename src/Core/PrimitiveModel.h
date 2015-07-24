@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Engine.h"
-#include "Vertex.h"
 #include "Model.h"
 
 class PrimitiveModel 

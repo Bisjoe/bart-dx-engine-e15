@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include "Engine.h"
 #include "Component.h"
 
 class Model :
@@ -11,7 +12,7 @@ public:
 	virtual ~Model();
 
 	virtual void Update(){}
-	virtual void Draw(){}
+	virtual void Draw();
 
 	virtual void BuildVertexBuffer(){}
 	virtual void BuildIndexBuffer(){}
@@ -35,6 +36,11 @@ protected:
 private:
 	float mRotation;
 	D3DXVECTOR3 mPosition;
+
+	D3DXMATRIX world;
+	D3DXMATRIX trans;
+	D3DXMATRIX rot;
+
 
 };
 

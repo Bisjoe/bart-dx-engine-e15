@@ -21,12 +21,9 @@ Engine::Engine(HINSTANCE hInstance, std::string winCaption, int screenWidth, int
 	: screenSize(screenWidth, screenHeight)
 	, App(hInstance, winCaption, D3DDEVTYPE_HAL, D3DCREATE_HARDWARE_VERTEXPROCESSING, screenWidth, screenHeight)
 	, soundEngine(nullptr)
-	, mPos(0.f, 10.f, -30.f)
-	, mUp(0.f, 1.f, 0.f)
-	, mTarget(0.f, 1.f, 0.f)
+	
 {
 	gApp = this;
-
 	InitAllVertexDeclarations();
 }
 
@@ -96,6 +93,8 @@ void Engine::Init(D3DXVECTOR2* nativeResolution)
 	//	this->scaling.x = (screenSize.x / NativeResolution.x);
 	//	this->scaling.y = (screenSize.y / NativeResolution.y);
 	//}
+	D3DPRESENT_PARAMETERS currentParams = gApp->GetParam();
+	camera = new Camera(currentParams);
 }
 
 void Engine::Start()
@@ -129,14 +128,12 @@ void Engine::Update()
 		}
 	}
 
-	mPos.z += 10.0f * gTimer->GetDeltaTime();
-
 	gTimer->Tick();
 }
 
 void Engine::Draw()
 {
-	BuildViewProjMtx();
+	camera->BuildViewProjMtx();
 
 	auto iter = Component::components.begin();
 	for (; iter != Component::components.end(); iter++)
@@ -259,25 +256,3 @@ void Engine::CheckDeleted()
 	Component::toDelete.clear();
 }
 
-void Engine::BuildViewProjMtx()
-{
-	// TODO Camera class
-
-	D3DXMatrixLookAtLH(&mView, &mPos, &mTarget, &mUp);
-	D3DXMatrixPerspectiveFovLH(&mProj, D3DX_PI * 0.25f,
-		(float)mD3Dpp.BackBufferWidth / (float)mD3Dpp.BackBufferHeight,
-		1.0f, 5000.0f);
-
-	//D3DXMatrixOrthoLH(&orth, (float)mD3Dpp.BackBufferWidth, 
-	//	(float)mD3Dpp.BackBufferHeight,	1.f, 5000.f);
-
-	// Fixed pipeline
-	HR(gD3DDevice->SetRenderState(D3DRS_LIGHTING, false));
-	HR(gD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
-
-	HR(gD3DDevice->SetTransform(D3DTS_VIEW, &mView));
-	HR(gD3DDevice->SetTransform(D3DTS_PROJECTION, &mProj));
-	// ---------------------
-
-	
-}

@@ -24,10 +24,13 @@ PrimitiveModel::PrimitiveModel(PrimitiveModel_Type type)
 		D3DXCreateCylinder(gD3DDevice, 1.f, 1.f, 6.0f, 20.0f, 20.0f, &mesh, 0);
 		break;
 	case PrimitiveModel::CUBE:
+
 		break;
 	case PrimitiveModel::SPHERE:
+
 		break;
 	case PrimitiveModel::TEAPOT:
+
 		break;
 	default:
 		break;
@@ -84,22 +87,13 @@ void PrimitiveModel::BuildIndexBuffer()
 
 void PrimitiveModel::Draw()
 {
+	Model::Draw();
+
 	if (mesh == nullptr)
 		return;
 
 	gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPosCol::decl));
 	gD3DDevice->SetIndices(mIB);
-	
-	D3DXMATRIX world;
-	D3DXMATRIX trans;
-	D3DXMATRIX rot;
-	D3DXMatrixIdentity(&world);
-	
-	D3DXMatrixRotationY(&rot, GetRotation());
-	D3DXMatrixTranslation(&trans, 5.f, 5.f, 0.f);
-	world = rot * trans;
-	
-	mFx->SetMatrix(mhWVP, &(world * gEngine->GetView() * gEngine->GetProj()));
 	
 	UINT numPasses = 0;
 	mFx->Begin(&numPasses, 0);
