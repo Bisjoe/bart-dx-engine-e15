@@ -23,6 +23,8 @@ public:
 	void SetPosition(float x, float y, float z) { mPosition.x = x; mPosition.y = y; mPosition.z = z; }
 	D3DXVECTOR3 GetPosition() { return mPosition; }
 
+	void SetScale(float x, float y, float z) { mScale.x = x; mScale.y = y; mScale.z = z; }
+
 protected:
 	IDirect3DVertexBuffer9* mVB;
 	IDirect3DIndexBuffer9* mIB;
@@ -36,10 +38,12 @@ protected:
 private:
 	float mRotation;
 	D3DXVECTOR3 mPosition;
+	D3DXVECTOR3 mScale;
 
 	D3DXMATRIX world;
 	D3DXMATRIX trans;
 	D3DXMATRIX rot;
+	D3DXMATRIX scale;
 
 
 };
