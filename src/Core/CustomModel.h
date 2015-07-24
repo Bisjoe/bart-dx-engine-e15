@@ -2,9 +2,9 @@
 
 #include "Engine.h"
 #include "Vertex.h"
-#include "Component.h"
+#include "Model.h"
 
-class CustomModel: public Component
+class CustomModel: public Model
 {
 public:
 	CustomModel();
@@ -12,14 +12,7 @@ public:
 
 	void OnLostDevice();
 	void OnResetDevice();
-	virtual void Update();
 	void Draw();
-
-	void SetRotation(float rot) { mRotation = rot; }
-	float GetRotation() { return mRotation; }
-
-	void SetPosition(float x, float y, float z) { mPosition.x = x; mPosition.y = y; mPosition.z = z; }
-	D3DXVECTOR3 GetPosition() { return mPosition; }
 
 protected:
 	virtual int GetNumFaces() = 0;
@@ -27,20 +20,5 @@ protected:
 
 	virtual void BuildVertexBuffer() { }
 	virtual void BuildIndexBuffer() { }
-	
-	IDirect3DVertexBuffer9* mVB;
-	IDirect3DIndexBuffer9* mIB;
-
-	ID3DXEffect* mFx;
-	ID3DXBuffer* mErrors;
-
-	D3DXHANDLE mhTech;
-	D3DXHANDLE mhWVP;
-
-	float currentRotation;
-
-private:
-	float mRotation;
-	D3DXVECTOR3 mPosition;
 };
 

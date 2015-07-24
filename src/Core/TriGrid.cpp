@@ -35,7 +35,7 @@ void TriGrid::Update()
 {
 	mFx->SetFloat(mhTime, gTimer->GetGameTime());
 	mFx->SetValue(mhEyePos, gEngine->GetCamPos(), sizeof(D3DXVECTOR3));
-	mFx->SetVector(mhFogColor, &D3DXVECTOR4(0.5f, 0.5f, 0.5f, 1.0f));
+	mFx->SetVector(mhFogColor, &D3DXVECTOR4(0.1f, 0.3f, 0.7f, 1.0f));
 }
 
 void TriGrid::BuildVertexBuffer()

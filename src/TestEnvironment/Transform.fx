@@ -17,7 +17,7 @@ uniform extern float gTime;
 uniform extern float3 gEyePos;
 uniform extern float4 gFogColor;
 
-float minDist = 0.0f;
+float minDist = 10.0f;
 float maxDist = 100.0f;
 
 // Amplitude
@@ -88,7 +88,7 @@ OutputVS TransformVS(float3 posL: POSITION0, float4 color: COLOR0)
 	outVS.posH = mul(float4(posL, 1.0f), gWVP);
 	outVS.color = GetColorFromHeight(posL.y);
 
-	float dist = distance(outVS.posH, gEyePos);
+	float dist = distance(posL, gEyePos);
 	outVS.fogLerp = saturate((dist - minDist) / (maxDist - minDist));
 
 	return outVS;
@@ -110,7 +110,8 @@ float4 TransformPS(OutputVS inVS): COLOR0
 
 float4 TransformPS_Black(OutputVS inVS) : COLOR0
 {
-	return (float4)0;
+	float4 finalColor = lerp((float4)0, gFogColor, inVS.fogLerp);
+	return finalColor;
 }
  
 // Techniques

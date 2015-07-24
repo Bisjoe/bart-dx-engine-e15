@@ -1,9 +1,6 @@
 #include "CustomModel.h"
 
 CustomModel::CustomModel()
-	: mVB(nullptr)
-	, mIB(nullptr)
-	, currentRotation(0.f)
 {
 	HR(D3DXCreateEffectFromFile(gD3DDevice, "Transform.fx", 0, 0, D3DXSHADER_DEBUG, 0, &mFx, &mErrors));
 	if (mErrors)
@@ -19,8 +16,6 @@ CustomModel::CustomModel()
 
 CustomModel::~CustomModel()
 {
-	ReleaseCOM(mVB);
-	ReleaseCOM(mIB);
 	ReleaseCOM(mFx);
 	ReleaseCOM(mErrors);
 }
@@ -35,11 +30,6 @@ void CustomModel::OnResetDevice()
 	mFx->OnResetDevice();
 }
 
-void CustomModel::Update()
-{
-	currentRotation += 0.1f * gTimer->GetDeltaTime();
-}
-
 void CustomModel::Draw()
 {
 	HR(gD3DDevice->SetStreamSource(0, mVB, 0, sizeof(VertexPosCol)));
@@ -48,21 +38,21 @@ void CustomModel::Draw()
 	{
 		HR(gD3DDevice->SetIndices(mIB));
 	}
-
+	
 	D3DXMATRIX world;
 	D3DXMATRIX trans;
 	D3DXMATRIX rot;
 	D3DXMatrixIdentity(&world);
-
+	
 	//D3DXMatrixRotationY(&rot, currentRotation);
 	//D3DXMatrixTranslation(&trans, 5.f, 5.f, 0.f);
 	//world = rot * trans;
-
+	
 	mFx->SetMatrix(mhWVP, &(world * gEngine->GetView() * gEngine->GetProj()) );
-
+	
 	UINT numPasses = 0;
 	mFx->Begin(&numPasses, 0);
-
+	
 	for (UINT i = 0; i < numPasses; i++)
 	{
 		mFx->BeginPass(i);

@@ -23,7 +23,7 @@ private:
 
 	float GetHeight(float x, float z)
 	{
-		return (((rand() % 160) + 1) / 1000.0f * (z*sinf(((rand() % 20) + 1) / 1000.0f * x) + x * cosf(((rand() % 20) + 1) / 1000.0f * z)));
+		return (0.3f * (z*sinf(0.1f * x) + x * cosf(0.1f * z)));
 	}
 
 	float tileW;

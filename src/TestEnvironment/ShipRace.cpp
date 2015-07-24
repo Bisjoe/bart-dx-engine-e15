@@ -7,6 +7,8 @@ ShipRace::ShipRace()
 	//cube = new Cube();
 	triGrid = new TriGrid(100, 100, 1.f);
 	triGrid->SetPosition(5.f, 0.f, 0.f);
+
+	Ship* ship = new Ship();
 }
 
 ShipRace::~ShipRace()
