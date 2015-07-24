@@ -12,7 +12,7 @@ PrimitiveModel::PrimitiveModel()
 	mhTech = mFx->GetTechniqueByName("TransformTech");
 	mhWVP = mFx->GetParameterByName(0, "gWVP");
 
-	mFx->SetTechnique(mhTech);
+	HR(mFx->SetTechnique(mhTech));
 }
 
 PrimitiveModel::PrimitiveModel(PrimitiveModel_Type type)
@@ -21,7 +21,7 @@ PrimitiveModel::PrimitiveModel(PrimitiveModel_Type type)
 	switch (type)
 	{
 	case PrimitiveModel::CYLINDER:
-		D3DXCreateCylinder(gD3DDevice, 1.f, 1.f, 6.0f, 20.0f, 20.0f, &mesh, 0);
+		HR(D3DXCreateCylinder(gD3DDevice, 1.f, 1.f, 6.0f, 20.0f, 20.0f, &mesh, 0));
 		break;
 	case PrimitiveModel::CUBE:
 
@@ -45,7 +45,7 @@ PrimitiveModel::PrimitiveModel(PrimitiveModel_Type type)
 	mhTech = mFx->GetTechniqueByName("TransformTech");
 	mhWVP = mFx->GetParameterByName(0, "gWVP");
 
-	mFx->SetTechnique(mhTech);
+	HR(mFx->SetTechnique(mhTech));
 }
 
 PrimitiveModel::~PrimitiveModel()
