@@ -17,6 +17,8 @@ public:
 	virtual void BuildVertexBuffer(){}
 	virtual void BuildIndexBuffer(){}
 
+	D3DXMATRIX GetWorldMatrix() { return world; }
+
 	void SetRotation(float rot) { mRotation = rot; }
 	float GetRotation() { return mRotation; }
 
