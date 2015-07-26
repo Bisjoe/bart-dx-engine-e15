@@ -21,19 +21,19 @@ PrimitiveModel::PrimitiveModel(PrimitiveModel_Type type)
 	switch (type)
 	{
 	case PrimitiveModel::CYLINDER:
-		HR(D3DXCreateCylinder(gD3DDevice, 1.f, 1.f, 6.f, 20.f, 20.f, &mesh, 0));
+		HR(D3DXCreateCylinder(gD3DDevice, 1.f, 1.f, 6.f, 20, 20, &mesh, 0));
 		break;
 	case PrimitiveModel::CUBE:
 		HR(D3DXCreateBox(gD3DDevice, 1.f, 1.f, 1.f, &mesh, 0));
 		break;
 	case PrimitiveModel::SPHERE:
-		HR(D3DXCreateSphere(gD3DDevice, 1.f, 10.f, 10.f, &mesh, 0));
+		HR(D3DXCreateSphere(gD3DDevice, 1.f, 10, 10, &mesh, 0));
 		break;
 	case PrimitiveModel::TEAPOT:
 		HR(D3DXCreateTeapot(gD3DDevice, &mesh, 0));
 		break;
 	case PrimitiveModel::CONE:
-		HR(D3DXCreateCylinder(gD3DDevice, 0, 1.f, 6.f, 20.f, 20.f, &mesh, 0));
+		HR(D3DXCreateCylinder(gD3DDevice, 0, 1.f, 6.f, 20, 20, &mesh, 0));
 		break;
 	default:
 		break;

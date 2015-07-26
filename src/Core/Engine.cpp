@@ -51,7 +51,10 @@ Engine::~Engine()
 	// Clearing the Sound Engine
 	soundEngine->drop();
 	soundEngine = nullptr;
-
+	
+	delete camera;
+	camera = nullptr;
+	
 	DestroyAllVertexDeclarations();
 }
 
@@ -93,6 +96,7 @@ void Engine::Init(D3DXVECTOR2* nativeResolution)
 	//	this->scaling.x = (screenSize.x / NativeResolution.x);
 	//	this->scaling.y = (screenSize.y / NativeResolution.y);
 	//}
+	
 	D3DPRESENT_PARAMETERS currentParams = gApp->GetParam();
 	camera = new Camera(currentParams);
 }
