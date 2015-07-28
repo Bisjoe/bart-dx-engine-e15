@@ -27,7 +27,7 @@ void Model::Draw()
 	D3DXMatrixRotationZ(&rotZ, mRotationZ);
 	D3DXMatrixTranslation(&trans, mPosition.x, mPosition.y, mPosition.z);
 	D3DXMatrixScaling(&scale, mScale.x, mScale.y, mScale.z);
-	world = rotX * rotY * rotZ * trans * scale;
+	world = scale * rotX * rotY * rotZ * trans;
 
 	mFx->SetMatrix(mhWVP, &(world * gEngine->GetCamera()->GetView() * gEngine->GetCamera()->GetProj()));
 }
