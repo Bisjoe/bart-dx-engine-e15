@@ -111,6 +111,7 @@ Sprite::~Sprite()
 {
 	delete srcRect;
 	delete dstRect;
+	delete texInfos;
 }
 
 void Sprite::Start()
