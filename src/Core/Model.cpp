@@ -22,8 +22,8 @@ Model::~Model()
 void Model::Draw()
 {
 	D3DXMatrixIdentity(&world);
-	D3DXMatrixRotationY(&rotX, mRotationY);
-	D3DXMatrixRotationX(&rotY, mRotationX);
+	D3DXMatrixRotationY(&rotY, mRotationY);
+	D3DXMatrixRotationX(&rotX, mRotationX);
 	D3DXMatrixRotationZ(&rotZ, mRotationZ);
 	D3DXMatrixTranslation(&trans, mPosition.x, mPosition.y, mPosition.z);
 	D3DXMatrixScaling(&scale, mScale.x, mScale.y, mScale.z);
