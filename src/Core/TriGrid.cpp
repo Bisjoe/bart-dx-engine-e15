@@ -4,20 +4,22 @@ TriGrid::TriGrid()
 	: width(100)
 	, height(100)
 	, tileW(1.0f)
+	, mIsFlat(false)
 {
 	BuildVertexBuffer();
 	BuildIndexBuffer();
 }
 
-TriGrid::TriGrid(int w, int h, int dx)
+TriGrid::TriGrid(int w, int h, int dx, bool isFlat)
 	: width(w)
 	, height(h)
 	, tileW(dx)
+	, mIsFlat(isFlat)
 {
 	mhTime = mFx->GetParameterByName(0, "gTime");
 	mhEyePos = mFx->GetParameterByName(0, "gEyePos");
 	mhFogColor = mFx->GetParameterByName(0, "gFogColor");
-
+	
 	mhTech = mFx->GetTechniqueByName("TransformTech");
 		
 	mFx->SetTechnique(mhTech);
@@ -56,8 +58,8 @@ void TriGrid::BuildVertexBuffer()
 		for (DWORD j = 0; j < height+1; j++)
 		{
 			float x = -halfHeight + j * tileW;
-			float y = GetHeight(x, z);
-
+			float y = (mIsFlat) ? 0 : GetHeight(x, z);
+	
 			v[i * (height+1) + j].pos = D3DXVECTOR3(x, y, z);
 			v[i * (height + 1) + j].col = D3DCOLOR_XRGB(255, 255, 255);
 		}

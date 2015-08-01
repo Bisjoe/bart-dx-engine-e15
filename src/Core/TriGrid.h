@@ -6,7 +6,7 @@ class TriGrid :
 	public CustomModel
 {
 public:
-	TriGrid(int w, int h, int dx);
+	TriGrid(int w, int h, int dx, bool isFlat = false);
 	~TriGrid();
 
 	void Update();
@@ -27,6 +27,7 @@ private:
 	}
 
 	float tileW;
+	bool mIsFlat;
 	int width, height;
 
 	D3DXHANDLE mhTime;
